@@ -1,0 +1,4 @@
+https://pypi.org/project/django-google-auth/
+
+https://oauthlib.readthedocs.io/en/latest/
+https://google-auth.readthedocs.io/en/latest/
