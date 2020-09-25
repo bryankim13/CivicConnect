@@ -17,12 +17,12 @@ from django.contrib import admin
 from django.urls import path, include # <-- Google integration
 from django.views.generic import TemplateView # <-- Google integration
 
-from nutboxcivic import views
+from .views import homeView
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', homeView.as_view(), name='home')
     # This line will go with our login/ page
     # TemplateView.as_view(template_name=”social_app/index.html”)), # <-- Google integration
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),  
     path('accounts/', include('allauth.urls')), # <-- Google integration
 ]
