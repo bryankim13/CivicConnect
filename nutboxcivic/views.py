@@ -9,9 +9,5 @@ from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
 
 
-
-def index(request):
-    return HttpResponse("insert a complete Civic Connect project here -> 001")
-
 class homeView(generic.TemplateView):
     template_name = 'civic/home.html'
