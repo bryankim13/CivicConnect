@@ -1,0 +1,23 @@
+2020-09-23: https://docs.djangoproject.com/en/3.1/intro/tutorial05/
+	Django Tutorial
+2020-09-23: https://docs.travis-ci.com/user/languages/python/
+	Travis CI setup for python
+2020-09-23: https://stackoverflow.com/questions/50805897/django-unit-tests-failing-on-travis-ci-builds
+	Fixing CI tests failing issue
+
+2020-09-24: https://github.com/jazzband/django-oauth-toolkit
+	Django OAuth
+2020-09-24: https://docs.djangoproject.com/en/3.1/topics/auth/
+	Django authorization
+2020-09-24: https://docs.djangoproject.com/en/3.1/ref/templates/language/
+	Django templates
+2020-09-24: https://googleapis.dev/python/google-auth/latest/user-guide.html
+	Google Auth
+2020-09-24: https://cloud.google.com/docs/authentication
+	Google Cloud Auth
+2020-09-24: https://django-allauth.readthedocs.io/en/latest/installation.html
+	Django All Auth
+
+2020-09-25: https://medium.com/@whizzoe/in-5-mins-set-up-google-login-to-sign-up-users-on-django-e71d5c38f5d5
+	Django All Auth tutorial
+	
