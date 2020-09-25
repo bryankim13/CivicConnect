@@ -20,7 +20,7 @@ from django.views.generic import TemplateView # <-- Google integration
 from .views import homeView
 
 urlpatterns = [
-    path('', homeView.as_view(), name='home')
+    path('', homeView.as_view(), name='home'),
     # This line will go with our login/ page
     # TemplateView.as_view(template_name=”social_app/index.html”)), # <-- Google integration
     path('admin/', admin.site.urls),  
