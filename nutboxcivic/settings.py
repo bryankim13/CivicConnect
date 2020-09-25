@@ -37,6 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',   # <-- Google integration
+    'social_app',   # <-- Google integration
+ 
+    'allauth',   # <-- Google integration
+    'allauth.account',   # <-- Google integration
+    'allauth.socialaccount',   # <-- Google integration
+    'allauth.socialaccount.providers.google',   # <-- Google integration
 ]
 
 MIDDLEWARE = [
@@ -118,6 +125,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTHENTICATION_BACKENDS = [ # Google integration
+ 'django.contrib.auth.backends.ModelBackend',
+ 'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1 # Google integration
+
+LOGIN_REDIRECT_URL = '/' # Google integration (home-page URL re-direct will go here)
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
 
 # Activate Django-Heroku.
 django_heroku.settings(locals(), test_runner=False)
