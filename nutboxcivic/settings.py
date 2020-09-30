@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '@_gr9pm86!!vaq^#u7xr(c-qn%gork7$crm&gq$hquxw5a58!x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if 'HEROKU' in os.environ:
+    DEBUG = False
+else:
+    DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "nutbox-civicconnect.herokuapp.com"]
 
 
 # Application definition
@@ -125,7 +129,12 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-SITE_ID = 2
+
+if 'HEROKU' in os.environ:
+    SITE_ID = 1
+else:
+    SITE_ID = 2
+
 LOGIN_REDIRECT_URL = '/'
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -146,26 +155,6 @@ SOCIALACCOUNT_PROVIDERS = {
 
 STATIC_URL = '/static/'
 
-# AUTHENTICATION_BACKENDS = [ # Google integration
-#  'django.contrib.auth.backends.ModelBackend',
-#  'allauth.account.auth_backends.AuthenticationBackend',
-# ]
-
-# SITE_ID = 1 # Google integration
-
-# LOGIN_REDIRECT_URL = '/' # Google integration (home-page URL re-direct will go here)
-
-# SOCIALACCOUNT_PROVIDERS = {
-#     'google': {
-#         'SCOPE': [
-#             'profile',
-#             'email',
-#         ],
-#         'AUTH_PARAMS': {
-#             'access_type': 'online',
-#         }
-#     }
-# }
 
 # Activate Django-Heroku.
 django_heroku.settings(locals(), test_runner=False)
