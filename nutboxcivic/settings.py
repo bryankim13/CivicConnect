@@ -130,12 +130,12 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-if 'HEROKU' in os.environ:
-    SITE_ID = 1
-else:
-    SITE_ID = 2
+#if 'HEROKU' in os.environ:
+    #SITE_ID = 1
+#else:
+SITE_ID = 1
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/gauth'
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
