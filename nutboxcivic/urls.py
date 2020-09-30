@@ -15,13 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
 from django.views.generic import TemplateView
 
 from nutboxcivic import views
+from .views import homeView
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', homeView.as_view(), name='home'),
     path('admin/', admin.site.urls),
 
     path('gauth', TemplateView.as_view(template_name="gauth/index.html")),

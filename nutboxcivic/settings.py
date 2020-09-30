@@ -61,7 +61,7 @@ ROOT_URLCONF = 'nutboxcivic.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'nutboxcivic/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -145,6 +145,27 @@ SOCIALACCOUNT_PROVIDERS = {
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# AUTHENTICATION_BACKENDS = [ # Google integration
+#  'django.contrib.auth.backends.ModelBackend',
+#  'allauth.account.auth_backends.AuthenticationBackend',
+# ]
+
+# SITE_ID = 1 # Google integration
+
+# LOGIN_REDIRECT_URL = '/' # Google integration (home-page URL re-direct will go here)
+
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': [
+#             'profile',
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'online',
+#         }
+#     }
+# }
 
 # Activate Django-Heroku.
 django_heroku.settings(locals(), test_runner=False)
