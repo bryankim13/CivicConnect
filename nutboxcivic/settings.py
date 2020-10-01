@@ -12,9 +12,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
+import dotenv
 import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+ON_HEROKU = os.environ.get('ON_HEROKU')
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '@_gr9pm86!!vaq^#u7xr(c-qn%gork7$crm&gq$hquxw5a58!x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-if 'HEROKU' in os.environ:
+if ON_HEROKU:
     DEBUG = True
 else:
     DEBUG = True
@@ -58,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'nutboxcivic.urls'
@@ -84,12 +88,21 @@ WSGI_APPLICATION = 'nutboxcivic.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+
+if ON_HEROKU:
+    DATABASE_URL = 'postgresql://<postgresql>'
+else:
+    DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+
+DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
+
+#DATABASES = {}
+#DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+
+## Get sqlite from .env
+#dotenv_file = os.path.join(BASE_DIR, ".env")
+#if os.path.isfile(dotenv_file):
+    #dotenv.load_dotenv(dotenv_file)
 
 
 # Password validation
@@ -133,7 +146,7 @@ AUTHENTICATION_BACKENDS = [
 #if 'HEROKU' in os.environ:
     #SITE_ID = 1
 #else:
-SITE_ID = 1
+#SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/gauth'
 
@@ -150,11 +163,17 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 # Activate Django-Heroku.
 django_heroku.settings(locals(), test_runner=False)
+
+# Database Ignore SSL locally
+options = DATABASES['default'].get('OPTIONS', {})
+options.pop('sslmode', None)
