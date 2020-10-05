@@ -5,7 +5,7 @@
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="#">CivicConnect</a>
+      <a class="navbar-brand" href="{% url 'home' %}">CivicConnect</a>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -15,8 +15,7 @@
 	
 	{% if user.is_authenticated %}
 	<header>Signed in as</header>
-	<a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">{{ user.email }}</a>
-	<h9>Hello, {{user.username}}</h9>
+	<a class="nav-link" href="{% url 'user:userindex' %}">{{ user.email }}</a>
     {% else %}
 	<header>Not signed in</header>
 	<a class="nav-link" href="{% url 'gauth' %}">Sign in</a>

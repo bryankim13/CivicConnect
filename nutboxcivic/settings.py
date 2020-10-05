@@ -38,6 +38,7 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1", "nutbox-civicconnect.herokuapp.com"]
 # Application definition
 
 INSTALLED_APPS = [
+    'user.apps.UserConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

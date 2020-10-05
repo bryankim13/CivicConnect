@@ -1,0 +1,21 @@
+{% extends 'civic/base.html' %}
+{% block title %}
+userindex
+{% endblock %}
+
+{% block content %}
+    <br>
+	<h3>{{user.username}}'s page</h3>
+	<br>
+		<p>Hello, {{user.username}}</p>
+        </form>
+		<br>
+		<br>
+		<a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">{{ 'my templates' }}</a>
+		<br>
+		<a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">{{ 'my issues' }}</a>
+		<br>
+		<a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">{{ 'my representatives' }}</a>
+		<br>
+		<a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">{{ 'my emails' }}</a>
+{% endblock %}
