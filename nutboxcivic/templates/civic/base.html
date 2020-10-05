@@ -19,7 +19,7 @@
 	<h9>Hello, {{user.username}}</h9>
     {% else %}
 	<header>Not signed in</header>
-	<a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Sign in</a>
+	<a class="nav-link" href="{% url 'gauth' %}">Sign in</a>
     {% endif %}
 	
 	

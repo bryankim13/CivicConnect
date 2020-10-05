@@ -24,6 +24,6 @@ urlpatterns = [
     path('', homeView.as_view(), name='home'),
     path('admin/', admin.site.urls),
 
-    path('gauth', TemplateView.as_view(template_name="gauth/index.html")),
+    path('gauth', TemplateView.as_view(template_name="gauth/index.html"), name = 'gauth'),
     path('accounts/', include('allauth.urls')),
 ]
