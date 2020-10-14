@@ -11,3 +11,6 @@ from django.views.generic.base import TemplateView
 
 class homeView(generic.TemplateView):
     template_name = 'civic/home.html'
+
+class sendView(generic.TemplateView):
+    template_name = 'civic/send.html'
