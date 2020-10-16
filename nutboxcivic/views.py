@@ -14,10 +14,24 @@ from masterdata.models import Emailtemplate
 class homeView(generic.TemplateView):
     template_name = 'civic/home.html'
 
-class sendView(generic.TemplateView):
-    template_name = 'civic/send.html'
-    def get_context_data(self, **kwargs):
-        context = {
+
+def usetemplate(request):
+    
+   # if request.method == 'POST':
+    #    form = YourForm(request.POST)
+     #   if form.is_valid():
+      #      answer = form.cleaned_data['value']
+       #     return render(request, 'civic/send.html', {
+        #    'templates_all': Emailtemplate.objects.all(),
+         #   'chosentemplate' : request.GET ,
+          #  })
+    #else:
+    a = ""
+    b = ''
+    if len(request.GET) > 0:
+        a = request.GET['templatedropdown']
+        b = Emailtemplate.objects.get(id = a).contentTemp
+    return render(request, 'civic/send.html', {
         'templates_all': Emailtemplate.objects.all(),
-        }
-        return context
+        'chosentemplate' : b ,
+    })

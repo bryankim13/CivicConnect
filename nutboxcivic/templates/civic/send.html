@@ -1,19 +1,19 @@
 {% extends 'civic/base.html' %}
-{% block title %}
-afgdhfgj
-{% endblock %}
+
 
 {% block content %}
-    <br><br>
-
-        <h1>{{ "dgshgdfzgsrtdrytufkjgxdfzsgdrtdjykufgh" }}</h1>
-		
-		<select class="mdb-select md-form">
-		<option value="" disabled selected>Choose your template</option>
-		{% for selectedtemplate in templates_all%}
-		<option value= selectedtemplate >{{ selectedtemplate.title }}  :  {{ selectedtemplate.shortDescription }}</option>
-		{% endfor %}
-		</select>
-
-        </form>
+	<form action="{% url 'send'%}" method="get">
+	<br><br>
+	<label for="templatelist">Choose your template: </label>
+	<select name='templatedropdown' id="templatelist" class="mdb-select md-form">
+	{% for selectedtemplate in templates_all%}
+	<option value= '{{selectedtemplate.id}}' >{{ selectedtemplate.title }}  :  {{ selectedtemplate.shortDescription }}</option>
+	{% endfor %}
+	</select>
+	
+    <input type="submit" value="Select">
+	</form>
+	<br>Template Preview<br><br>
+	<textarea class="form-control" id="exampleFormControlTextarea1" rows="15">{{chosentemplate}}</textarea>
+	
 {% endblock %}

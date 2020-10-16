@@ -18,12 +18,12 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 
 from nutboxcivic import views
-from .views import homeView, sendView
+from .views import homeView
 
 urlpatterns = [
     path('', homeView.as_view(), name='home'),
     path('admin/', admin.site.urls),
-    path('send/', sendView.as_view(), name = 'send'),
+    path('send/', views.usetemplate, name = 'send'),
 
     path('gauth', TemplateView.as_view(template_name="gauth/index.html"), name = 'gauth'),
     path('accounts/', include('allauth.urls')),
