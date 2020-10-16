@@ -10,6 +10,9 @@ from django.views.generic.base import TemplateView
 
 from masterdata.models import Emailtemplate
 
+import urllib #to encode email templates into url format for the mailto url link
+#urllib.unquote(selectedtemplatecontent.value).decode('utf8')
+
 
 class homeView(generic.TemplateView):
     template_name = 'civic/home.html'
@@ -26,12 +29,16 @@ def usetemplate(request):
          #   'chosentemplate' : request.GET ,
           #  })
     #else:
-    a = ""
-    b = ''
+    selectedtemplateid = ''
+    selectedtemplatecontent = ''
+    link = ''
+    emails = 'leyew99290@ofdyn.com' # a temporary email 
     if len(request.GET) > 0:
-        a = request.GET['templatedropdown']
-        b = Emailtemplate.objects.get(id = a).contentTemp
+        selectedtemplateid = request.GET['templatedropdown']
+        selectedtemplatecontent = Emailtemplate.objects.get(id = selectedtemplateid).contentTemp
+        link = 'mailto:' + emails + '?cc=&subject=' + urllib.parse.quote(Emailtemplate.objects.get(id = selectedtemplateid).subject) + '&body=' + urllib.parse.quote(selectedtemplatecontent)
     return render(request, 'civic/send.html', {
         'templates_all': Emailtemplate.objects.all(),
-        'chosentemplate' : b ,
+        'chosentemplate' : selectedtemplatecontent ,
+        'generatedlink' : link,
     })
