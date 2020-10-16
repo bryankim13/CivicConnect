@@ -10,12 +10,8 @@ afgdhfgj
 		
 		<select class="mdb-select md-form">
 		<option value="" disabled selected>Choose your template</option>
-		<option value="1">Option 1</option>
-		<option value="2">Option 2</option>
-		<option value="3">Option 3</option>
-		{% for template in templates_all%}
-		<option value= template.title >{{ template.shortDescription }}</option>
-		<p>name: </p>
+		{% for selectedtemplate in templates_all%}
+		<option value= selectedtemplate >{{ selectedtemplate.title }}  :  {{ selectedtemplate.shortDescription }}</option>
 		{% endfor %}
 		</select>
 
