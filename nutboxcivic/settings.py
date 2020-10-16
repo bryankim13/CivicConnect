@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'gauth',
+    'masterdata.apps.MasterdataConfig',
+    
 
     'allauth',
     'allauth.account',
