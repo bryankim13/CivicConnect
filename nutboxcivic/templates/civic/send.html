@@ -1,0 +1,36 @@
+{% extends 'civic/base.html' %}
+
+
+{% block content %}
+	<form action="{% url 'send'%}" method="get">
+	<br><br><br>
+	{% if generatedlink != '' %}
+	<a href='{{generatedlink}}'>{{ 'Click here to send your email' }}</a>
+	{% endif %}
+	<br><br>
+	<label for="templatelist">Choose your template: </label>
+	<select name='templatedropdown' id="templatelist" class="mdb-select md-form">
+	{% for selectedtemplate in templates_all%}
+	<option value= '{{selectedtemplate.id}}' >{{ selectedtemplate.title }}  :  {{ selectedtemplate.shortDescription }}</option>
+	{% endfor %}
+	</select>
+	
+    <input type="submit" value="Select">
+	</form>
+	<br>
+	Template Preview
+	<br>
+	<button onclick="copy()">Copy text</button>
+	<br>
+	<textarea class="form-control" id="emailpreview" rows="25">{{chosentemplate}}</textarea>
+
+	<script>
+	function copy() {
+	var copyText = document.getElementById("emailpreview");
+	copyText.select();
+	copyText.setSelectionRange(0, 99999)
+	document.execCommand("copy");
+	}
+	</script>
+	
+{% endblock %}
