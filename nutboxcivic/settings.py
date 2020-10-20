@@ -28,7 +28,7 @@ SECRET_KEY = '@_gr9pm86!!vaq^#u7xr(c-qn%gork7$crm&gq$hquxw5a58!x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ON_HEROKU:
-    DEBUG = True
+    DEBUG = False
 else:
     DEBUG = True
 
@@ -93,7 +93,7 @@ WSGI_APPLICATION = 'nutboxcivic.wsgi.application'
 
 
 if ON_HEROKU:
-    DATABASE_URL = 'postgresql://<postgresql>'
+    DATABASE_URL = 'postgres://wzrreugnssmcls:605a451e1d741a0857aa8afe5d63ed91f27700821b5942b21f34dc87ae9f39c6@ec2-34-206-252-187.compute-1.amazonaws.com:5432/d8sidgo9s5bcjk'
 else:
     DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 
@@ -149,7 +149,7 @@ AUTHENTICATION_BACKENDS = [
 #if 'HEROKU' in os.environ:
     #SITE_ID = 1
 #else:
-#SITE_ID = 1
+SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/gauth'
 

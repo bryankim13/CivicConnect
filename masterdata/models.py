@@ -10,6 +10,7 @@ class Emailtemplate(models.Model):
     subject = models.CharField(max_length = 200)
     state = models.CharField(max_length = 50)
     published = bool
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.UUIDField(primary_key=False, default=uuid.uuid4, editable=False)
+
     def __str__(self):
         return self.title
