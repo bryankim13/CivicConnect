@@ -17,7 +17,7 @@ import dj_database_url
 import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-ON_HEROKU = os.environ.get('ON_HEROKU')
+ON_HEROKU = os.environ.get('HEROKU')
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +28,7 @@ SECRET_KEY = '@_gr9pm86!!vaq^#u7xr(c-qn%gork7$crm&gq$hquxw5a58!x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ON_HEROKU:
-    DEBUG = False
+    DEBUG = True
 else:
     DEBUG = True
 
@@ -146,9 +146,6 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-#if 'HEROKU' in os.environ:
-    #SITE_ID = 1
-#else:
 SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/gauth'
