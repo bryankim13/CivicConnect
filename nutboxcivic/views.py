@@ -9,6 +9,7 @@ from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
 
 from masterdata.models import Emailtemplate
+from .forms import templateForm
 
 import urllib #to encode email templates into url format for the mailto url link
 #urllib.unquote(selectedtemplatecontent.value).decode('utf8')
@@ -16,6 +17,22 @@ import urllib #to encode email templates into url format for the mailto url link
 
 class homeView(generic.TemplateView):
     template_name = 'civic/home.html'
+
+class formTemplate(generic.CreateView):
+    form_class = templateForm
+    model = Emailtemplate
+    template_name = 'civic/createTemp.html'
+
+class thanksView(generic.TemplateView):
+    template_name = 'civic/thankyou.html'
+
+def formingTemp(request):
+    if request.method == "POST":
+        form = templateForm(request.POST)
+        if form.is_valid():
+            emTemp = form.save(commit=False)
+            emTemp.save()
+    return HttpResponseRedirect(reverse('thanksSubmit'))
 
 
 def usetemplate(request):

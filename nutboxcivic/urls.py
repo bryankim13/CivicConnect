@@ -24,6 +24,9 @@ urlpatterns = [
     path('', homeView.as_view(), name='home'),
     path('admin/', admin.site.urls),
     path('send/', views.usetemplate, name = 'send'),
+    path('createTemplate', views.formTemplate.as_view(), name = 'createTemp'),
+    path('creatingTemplate', views.formingTemp, name = 'creatingTemp'),
+    path('thanksforsubmitting', views.thanksView.as_view(), name = 'thanksSubmit'),
 
     path('gauth', TemplateView.as_view(template_name="gauth/index.html"), name = 'gauth'),
     path('accounts/', include('allauth.urls')),
