@@ -48,12 +48,13 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'gauth',
     'masterdata.apps.MasterdataConfig',
-    
 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
