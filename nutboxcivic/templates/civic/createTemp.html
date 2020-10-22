@@ -1,17 +1,21 @@
 {% extends 'civic/base.html' %}
+
 {% block title %}
-Template
+Create Template - CivicConnect
 {% endblock %}
 
 {% block content %}
-<br><br>
-<h1>{{ "Speak Your Beliefs" }}</h1>
-<br><br>
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    <form action="{% url 'creatingTemp' %}" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <br><br>
-    <button type="submit" class="save btn btn-default">Publish</button>
-    </form>
+	<div class="row justify-content-center">
+		<h1>{{ "Making Your Voice Heard." }}</h1>
+	</div>
+
+	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+	<form action="{% url 'creatingTemp' %}" method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+
+		<div class="row justify-content-center">
+			<button type="submit" class="save btn btn-primary">Publish</button>
+		</div>
+	</form>
 {% endblock %}

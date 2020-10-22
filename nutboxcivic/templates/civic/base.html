@@ -10,36 +10,36 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="{% url 'home' %}">CivicConnect</a>
+	<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+		<a class="navbar-brand text-white" href="{% url 'home' %}">CivicConnect</a>
 		<div class="collapse navbar-collapse" id="">
-			<a class="nav-link" href="{% url 'send' %}">{{ 'Contact Representatives' }}</a>
-			<a class="nav-link" href="{% url 'createTemp' %}">{{ 'Create A Template' }}</a>
+			<a class="nav-link text-light" href="{% url 'send' %}">{{ 'Contact Representatives' }}</a>
+			<a class="nav-link text-light" href="{% url 'createTemp' %}">{{ 'Create A Template' }}</a>
 		</div>
-		
-		{% if user.is_authenticated %}
-			<header>Signed in as</header>
-			<a class="nav-link" href="{% url 'user:userindex' %}">{{ user.email }}</a>
-		{% else %}
-			<header>Not signed in</header>
-			<a class="nav-link" href="{% url 'gauth' %}">Sign in</a>
-		{% endif %}
+
+		<div class="ml-auto text-light">
+			{% if user.is_authenticated %}
+				Signed in as
+				<a class="text-white" href="{% url 'user:userindex' %}">{{ user.email }}</a>
+			{% else %}
+				<a class="text-white" href="{% url 'gauth' %}">Sign in</a>
+			{% endif %}
+		</div>
 	</nav>
 
-	<div class="content container">
-		<div class="row">
-			<div class="col-md-8">
-				{% block content %}{% endblock %}
-			</div>
-		</div>
+	<div class="content container col-md-8 mt-5">
+		{% block content %}
+		{% endblock %}
 	</div>
 
-	<div class="navbar fixed-bottom justify-content-center text-dark">
-		<p> NutBux:
-			<a class="text-dark" href="mailto:pcb8gb@virginia.edu">Penn Bauman</a>,
-			<a class="text-dark" href="mailto:bjk3yf@virginia.edu">Bryan Kim</a>,
-			<a class="text-dark" href="mailto:crm6zg@virginia.edu">Cameron Mukerjee</a>, &amp;
-			<a class="text-dark" href="mailto:awz6ay@virginia.edu">Andrew Zhao</a>
+	<div style="height:5em"></div>
+
+	<div class="navbar fixed-bottom justify-content-center text-light bg-secondary" style="margin-bottom:-1em">
+		<p> NutBox:
+			<a class="text-light" href="mailto:pcb8gb@virginia.edu">Penn Bauman</a>,
+			<a class="text-light" href="mailto:bjk3yf@virginia.edu">Bryan Kim</a>,
+			<a class="text-light" href="mailto:crm6zg@virginia.edu">Cameron Mukerjee</a>, &amp;
+			<a class="text-light" href="mailto:awz6ay@virginia.edu">Andrew Zhao</a>
 		</p>
 	</div>
 </body>
