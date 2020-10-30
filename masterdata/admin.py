@@ -1,7 +1,5 @@
 from django.contrib import admin
 
-from .models import Emailtemplate, Representative, Issue
+from .models import Emailtemplate
 
 admin.site.register(Emailtemplate)
-admin.site.register(Representative)
-admin.site.register(Issue)
