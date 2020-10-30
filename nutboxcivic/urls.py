@@ -24,7 +24,6 @@ urlpatterns = [
     path('', homeView.as_view(), name='home'),
     path('admin/', admin.site.urls),
     path('send/', views.usetemplate, name = 'send'),
-    path('select/', views.selecttemplate, name = "select"),
 
     path('gauth', TemplateView.as_view(template_name="gauth/index.html"), name = 'gauth'),
     path('accounts/', include('allauth.urls')),

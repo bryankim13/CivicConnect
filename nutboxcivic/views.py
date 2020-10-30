@@ -42,15 +42,3 @@ def usetemplate(request):
         'chosentemplate' : selectedtemplatecontent ,
         'generatedlink' : link,
     })
-
-def selecttemplate(request):
-    statefilter = ''
-    issuefilter = ''
-    if len(request.GET) > 0:
-        statefilter = ''
-        issuefilter = ''
-    return render(request, 'civic/templateselection.html', {
-        'templates_all': Emailtemplate.objects.all(),
-        'sfilter' : statefilter ,
-        'ifilter' : issuefilter,
-    })
