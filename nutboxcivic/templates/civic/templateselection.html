@@ -1,0 +1,20 @@
+{% extends 'civic/base.html' %}
+
+
+{% block content %}
+	<form action="{% url 'send'%}" method="get">
+	<br>View and Select Templates
+	<br><br>
+	{% for currenttemplate in templates_all%}
+	<div class="card" style="width: 40rem;">
+	<div class="card-body">
+    <h5 class="card-title">{{selectedtemplate.title}}</h5>
+	<h6 class="card-subtitle mb-2 text-muted">{{selectedtemplate.datecreated}}</h6>
+    <p class="card-text">{{ selectedtemplate.shortDescription }}</p>
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="card-link">Card link(doesn't work yet)</a>
+	</div>
+	{% endfor %}
+	</form>
+	<br>
+
+{% endblock %}
