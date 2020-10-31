@@ -7,15 +7,21 @@
 	{% if generatedlink != '' %}
 	<a href='{{generatedlink}}'>{{ 'Click here to send your email' }}</a>
 	{% endif %}
-	<br><br>
+	<br>
+	<a href="{% url 'select'%}" class="card-link">Select Template</a>
+	<br>
+	<!--
+	<br>
 	<label for="templatelist">Choose your template: </label>
 	<select name='templatedropdown' id="templatelist" class="mdb-select md-form">
 	{% for selectedtemplate in templates_all%}
 	<option value= '{{selectedtemplate.id}}' >{{ selectedtemplate.title }}  :  {{ selectedtemplate.shortDescription }}</option>
 	{% endfor %}
 	</select>
+	<input type="submit" value="Select">
+	-->
 	
-    <input type="submit" value="Select">
+    
 	</form>
 	<br>
 	Template Preview

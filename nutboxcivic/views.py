@@ -8,7 +8,7 @@ from django.utils import timezone
 from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
 
-from masterdata.models import Emailtemplate
+from masterdata.models import Emailtemplate, Issue, Representative
 
 import urllib #to encode email templates into url format for the mailto url link
 #urllib.unquote(selectedtemplatecontent.value).decode('utf8')
@@ -18,8 +18,14 @@ class homeView(generic.TemplateView):
     template_name = 'civic/home.html'
 
 
-def usetemplate(request):
-    
+def usetemplate(request, templateid):
+    try:
+        if(templateid == 0):
+            currenttemplate = None
+        else:
+            currenttemplate = Emailtemplate.objects.get(pk=templateid)
+    except Emailtemplate.DoesNotExist:
+        raise Http404("Template does not exist")
    # if request.method == 'POST':
     #    form = YourForm(request.POST)
      #   if form.is_valid():
@@ -29,16 +35,40 @@ def usetemplate(request):
          #   'chosentemplate' : request.GET ,
           #  })
     #else:
-    selectedtemplateid = ''
     selectedtemplatecontent = ''
     link = ''
+    templateobject = None
     emails = 'leyew99290@ofdyn.com' # a temporary email 
+    if(templateid is not None):
+        templateobject = Emailtemplate.objects.get(id = templateid)
+        selectedtemplatecontent = templateobject.contentTemp
+        link = 'mailto:' + emails + '?cc=&subject=' + urllib.parse.quote(templateobject.subject) + '&body=' + urllib.parse.quote(selectedtemplatecontent)
     if len(request.GET) > 0:
-        selectedtemplateid = request.GET['templatedropdown']
-        selectedtemplatecontent = Emailtemplate.objects.get(id = selectedtemplateid).contentTemp
-        link = 'mailto:' + emails + '?cc=&subject=' + urllib.parse.quote(Emailtemplate.objects.get(id = selectedtemplateid).subject) + '&body=' + urllib.parse.quote(selectedtemplatecontent)
+        selectedtemplateid = '' #placeholder code
     return render(request, 'civic/send.html', {
         'templates_all': Emailtemplate.objects.all(),
         'chosentemplate' : selectedtemplatecontent ,
         'generatedlink' : link,
+    })
+
+def usetemplatenoid(request):
+    selectedtemplatecontent = ''
+    link = ''
+    emails = 'leyew99290@ofdyn.com' # a temporary email    
+    return render(request, 'civic/send.html', {
+        'templates_all': Emailtemplate.objects.all(),
+        'chosentemplate' : selectedtemplatecontent ,
+        'generatedlink' : link,
+    })
+
+def selecttemplate(request):
+    statefilter = ''
+    issuefilter = ''
+    if len(request.GET) > 0:
+        statefilter = ''
+        issuefilter = ''
+    return render(request, 'civic/templateselection.html', {
+        'templates_all': Emailtemplate.objects.all(),
+        'sfilter' : statefilter ,
+        'ifilter' : issuefilter,
     })
