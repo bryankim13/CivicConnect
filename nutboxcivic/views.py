@@ -7,6 +7,8 @@ from django.views import generic
 from django.utils import timezone
 from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 
 from masterdata.models import Emailtemplate, Issue, Representative
 
@@ -72,3 +74,7 @@ def selecttemplate(request):
         'sfilter' : statefilter ,
         'ifilter' : issuefilter,
     })
+
+def logout_request(request):
+    logout(request)
+    return redirect("home")

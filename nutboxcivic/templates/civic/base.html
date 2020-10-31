@@ -8,6 +8,7 @@
       <a class="navbar-brand" href="{% url 'home' %}">CivicConnect</a>
 	  
 	  <a class="nav-link" href="{% url 'send' %}">{{ 'Contact representatives' }}</a>
+	  <a href="{% url 'select'%}" class="card-link">Select Template</a>
 
 	  
      <!-- <form class="form-inline my-2 my-lg-0">-->
@@ -20,6 +21,7 @@
 	{% if user.is_authenticated %}
 	<header>Signed in as</header>
 	<a class="nav-link" href="{% url 'user:userindex' %}">{{ user.email }}</a>
+	<a class="nav-link" href="{% url 'logout' %}">Log out</a>
     {% else %}
 	<header>Not signed in</header>
 	<a class="nav-link" href="{% url 'gauth' %}">Sign in</a>
