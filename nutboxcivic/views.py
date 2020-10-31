@@ -10,7 +10,7 @@ from django.views.generic.base import TemplateView
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 
-from masterdata.models import Emailtemplate, Issue, Representative
+from masterdata.models import Emailtemplate, Issue, Representative, User
 
 import urllib #to encode email templates into url format for the mailto url link
 #urllib.unquote(selectedtemplatecontent.value).decode('utf8')
@@ -78,3 +78,13 @@ def selecttemplate(request):
 def logout_request(request):
     logout(request)
     return redirect("home")
+
+def gauth(request):
+    useremail = ''
+    if request.user.is_authenticated:
+        useremail = request.user.email
+        if(User.objects.filter(email = useremail).count() == 0):
+            userobj = User(name=request.user.username, email=useremail)
+    return render(request, "gauth/index.html", {
+        'useremail': useremail,
+    })

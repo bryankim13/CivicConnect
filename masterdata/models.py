@@ -18,7 +18,7 @@ class Emailtemplate(models.Model):
         return self.title
 
 class Issue(models.Model):
-    emailtemplate = models.ForeignKey(Emailtemplate, on_delete=models.CASCADE)
+    emailtemplates = models.ForeignKey(Emailtemplate, on_delete=models.CASCADE)
     title = models.CharField(max_length = 200)
     content = models.TextField()
     state = models.CharField(max_length= 2)
@@ -38,6 +38,13 @@ class Representative(models.Model):
     def __str__(self):
         return self.name
     
-
+class User(models.Model):
+    name = models.CharField(max_length = 100)
+    email = models.CharField(max_length= 50)
+    emailtemplates = models.ForeignKey(Emailtemplate, on_delete=models.CASCADE)
+    issues = models.ForeignKey(Issue, on_delete=models.CASCADE)
+    representatives = models.ForeignKey(Representative, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
 
 

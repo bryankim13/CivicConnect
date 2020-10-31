@@ -27,7 +27,7 @@ urlpatterns = [
     path('<uuid:templateid>/send/', views.usetemplate, name = 'send'),
     path('select/', views.selecttemplate, name = "select"),
 
-    path('gauth', TemplateView.as_view(template_name="gauth/index.html"), name = 'gauth'),
+    path('gauth', views.gauth, name = 'gauth'),
     path('accounts/', include('allauth.urls')),
     path('user/', include('user.urls'), name = 'user'),
     path("logout/", views.logout_request, name="logout"),
