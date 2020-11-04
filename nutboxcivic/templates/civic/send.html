@@ -1,42 +1,47 @@
 {% extends 'civic/base.html' %}
 
+{% block title %}
+Contact Representative - CivicConnect
+{% endblock %}
 
 {% block content %}
+	<div class="row justify-content-center">
+		<h1>{{ "Contact Representative" }}</h1>
+	</div>
+
+	<div class="row justify-content-center">
 	<form action="{% url 'send'%}" method="get">
-	<br><br><br>
-	{% if generatedlink != '' %}
-	<a href='{{generatedlink}}'>{{ 'Click here to send your email' }}</a>
-	{% endif %}
-	<br>
-	<a href="{% url 'select'%}" class="card-link">Select Template</a>
-	<br>
-	<!--
-	<br>
-	<label for="templatelist">Choose your template: </label>
-	<select name='templatedropdown' id="templatelist" class="mdb-select md-form">
-	{% for selectedtemplate in templates_all%}
-	<option value= '{{selectedtemplate.id}}' >{{ selectedtemplate.title }}  :  {{ selectedtemplate.shortDescription }}</option>
-	{% endfor %}
-	</select>
-	<input type="submit" value="Select">
-	-->
+		{% if generatedlink != '' %}
+			<a href='{{generatedlink}}'>{{ 'Click here to send your email' }}</a>
+		{% endif %}
+		<br>
+		<label for="templatelist">Choose your template: </label>
+		<select name='templatedropdown' id="templatelist" class="mdb-select md-form">
+			<option value='' disabled selected hidden>---</option>
+			{% for selectedtemplate in templates_all%}
+				<option value= '{{selectedtemplate.id}}' >
+					{{ selectedtemplate.title }}  :  {{ selectedtemplate.shortDescription }}
+				</option>
+			{% endfor %}
+		</select>
 	
-    
+		<input type="submit" value="Select">
 	</form>
-	<br>
-	Template Preview
-	<br>
-	<button onclick="copy()">Copy text</button>
-	<br>
-	<textarea class="form-control" id="emailpreview" rows="25">{{chosentemplate}}</textarea>
+	</div>
+
+	<div class="row justify-content-center">
+		<h3>Template Preview</h3>
+		<textarea class="form-control" id="emailpreview" rows="20">{{chosentemplate}}</textarea>
+		<button class="btn btn-primary mt-2" onclick="copy()">Copy text</button>
+	</div>
 
 	<script>
-	function copy() {
-	var copyText = document.getElementById("emailpreview");
-	copyText.select();
-	copyText.setSelectionRange(0, 99999)
-	document.execCommand("copy");
-	}
+		function copy() {
+			var copyText = document.getElementById("emailpreview");
+			copyText.select();
+			copyText.setSelectionRange(0, 99999)
+			document.execCommand("copy");
+		}
 	</script>
 	
 {% endblock %}

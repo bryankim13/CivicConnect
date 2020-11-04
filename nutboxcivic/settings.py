@@ -17,7 +17,7 @@ import dj_database_url
 import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-ON_HEROKU = os.environ.get('ON_HEROKU')
+ON_HEROKU = os.environ.get('HEROKU')
 
 
 # Quick-start development settings - unsuitable for production
@@ -48,12 +48,13 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'gauth',
     'masterdata.apps.MasterdataConfig',
-    
 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -93,7 +94,7 @@ WSGI_APPLICATION = 'nutboxcivic.wsgi.application'
 
 
 if ON_HEROKU:
-    DATABASE_URL = 'postgresql://<postgresql>'
+    DATABASE_URL = 'postgres://wzrreugnssmcls:605a451e1d741a0857aa8afe5d63ed91f27700821b5942b21f34dc87ae9f39c6@ec2-34-206-252-187.compute-1.amazonaws.com:5432/d8sidgo9s5bcjk'
 else:
     DATABASE_URL = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
 
@@ -146,10 +147,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-#if 'HEROKU' in os.environ:
-    #SITE_ID = 1
-#else:
-#SITE_ID = 1
+SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/gauth'
 

@@ -1,21 +1,22 @@
 {% extends 'civic/base.html' %}
 {% load socialaccount %}
 
-{% block content %}
-    <html>
-  <head>
-    <title>Google Registration</title>
-  </head>
-  <body>
-  <h1>My Google Login Project</h1>
-  {% if user.is_authenticated %}
-  <p>Welcome, {{ user.username }} !</p>
- 
-  {% else %}
-  <a href="{% provider_login_url 'google' %}">Login with Google</a>
-  {% endif %}
+{% block title %}Google Registration{% endblock %}
 
-  </body>
-</html>
+{% block content %}
+	<div class="row justify-content-center">
+		<h1>{{ "Login" }}</h1>
+	</div>
+
+	<div class="content container col-md-8 mt-5">
+		<div class="row">
+			{% if user.is_authenticated %}
+				<p>Welcome, {{ user.username }}!</p>
+			{% else %}
+				<a href="{% provider_login_url 'google' %}">Login with Google</a>
+			{% endif %}
+		</div>
+	</div>
 {% endblock %}
+
 

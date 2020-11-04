@@ -26,6 +26,9 @@ urlpatterns = [
     path('send/', views.usetemplatenoid, name = 'send'),
     path('<uuid:templateid>/send/', views.usetemplate, name = 'send'),
     path('select/', views.selecttemplate, name = "select"),
+    path('createTemplate', views.formTemplate.as_view(), name = 'createTemp'),
+    path('creatingTemplate', views.formingTemp, name = 'creatingTemp'),
+    path('thanksforsubmitting', views.thanksView.as_view(), name = 'thanksSubmit'),
 
     path('gauth', views.gauth, name = 'gauth'),
     path('accounts/', include('allauth.urls')),
