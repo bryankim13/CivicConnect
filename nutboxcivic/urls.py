@@ -24,7 +24,7 @@ urlpatterns = [
     path('', homeView.as_view(), name='home'),
     path('admin/', admin.site.urls),
     path('send/', views.usetemplatenoid, name = 'send'),
-    path('<uuid:templateid>/send/', views.usetemplate, name = 'send'),
+    path('<templateid>/send/', views.usetemplate, name = 'send'),
     path('select/', views.selecttemplate, name = "select"),
     path('createTemplate', views.formTemplate.as_view(), name = 'createTemp'),
     path('creatingTemplate', views.formingTemp, name = 'creatingTemp'),
