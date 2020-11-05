@@ -3,6 +3,6 @@ python: "3.8"
 install:
     - python -m pip install -r requirements.txt
 script:
-    python manage.py test nutboxcivic
-    python manage.py test masterdata
+    - python manage.py test nutboxcivic
+    - python manage.py test masterdata
 
