@@ -9,9 +9,13 @@ from django.views.generic.edit import FormView
 from django.views.generic.base import TemplateView
 from django.contrib.auth import logout
 from django.shortcuts import redirect
+from django.contrib import messages
+from masterdata.models import Emailtemplate, Issue, Representative, client
+from .forms import templateForm, UserForm, ProfileForm
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
 
-from masterdata.models import Emailtemplate, Issue, Representative, User
-from .forms import templateForm
 
 import urllib #to encode email templates into url format for the mailto url link
 #urllib.unquote(selectedtemplatecontent.value).decode('utf8')
@@ -104,4 +108,24 @@ def gauth(request):
             userobj = User(name=request.user.username, email=useremail)
     return render(request, "gauth/index.html", {
         'useremail': useremail,
+    })
+
+@login_required
+@transaction.atomic
+def update_profile(request):
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.clients)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return HttpResponseRedirect('/')
+        else:
+            messages.error(request, _('Please correct the error below.'))
+    else:
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.clients)
+    return render(request, 'civic/profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form
     })

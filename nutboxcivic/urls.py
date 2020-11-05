@@ -29,7 +29,7 @@ urlpatterns = [
     path('createTemplate', views.formTemplate.as_view(), name = 'createTemp'),
     path('creatingTemplate', views.formingTemp, name = 'creatingTemp'),
     path('thanksforsubmitting', views.thanksView.as_view(), name = 'thanksSubmit'),
-
+    path('profile/', views.update_profile, name = 'profile'),
     path('gauth', views.gauth, name = 'gauth'),
     path('accounts/', include('allauth.urls')),
     path('user/', include('user.urls'), name = 'user'),

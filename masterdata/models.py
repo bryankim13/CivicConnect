@@ -1,5 +1,7 @@
 from django.db import models
-
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 import uuid
 
 import datetime
@@ -35,12 +37,16 @@ class Representative(models.Model):
     def __str__(self):
         return self.name
 
-class User(models.Model):
-    name = models.CharField(max_length = 100)
-    email = models.CharField(max_length= 50)
-    emailtemplates = models.ForeignKey(Emailtemplate, on_delete=models.CASCADE)
-    issues = models.ForeignKey(Issue, on_delete=models.CASCADE)
-    representatives = models.ForeignKey(Representative, on_delete=models.CASCADE)
+class client(models.Model):
+    user = models.OneToOneField(User,related_name='clients',unique=True,null=False, db_index=True,on_delete=models.CASCADE)
+    State = models.CharField(max_length = 2)
+    emailtemplates = models.ForeignKey(Emailtemplate,blank = True,null=True, on_delete=models.CASCADE)
+    issues = models.ForeignKey(Issue,blank = True,null=True, on_delete=models.CASCADE)
+    representatives = models.ForeignKey(Representative,blank = True,null=True, on_delete=models.CASCADE)
     def __str__(self):
-        return self.name
+        return self.user.first_name
 
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        client.objects.create(user=instance)
