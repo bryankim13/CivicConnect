@@ -15,6 +15,9 @@ class Emailtemplate(models.Model):
     datecreated = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.title
+    def was_published_recently(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.datecreated <= now
 
 class Issue(models.Model):
     emailtemplates = models.ForeignKey(Emailtemplate, on_delete=models.CASCADE)
@@ -26,6 +29,9 @@ class Issue(models.Model):
     datecreated = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.title
+    def was_published_recently(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.datecreated <= now
 
 class Representative(models.Model):
     name = models.CharField(max_length = 100)
