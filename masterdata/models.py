@@ -2,8 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-import uuid
+from django.utils import timezone
 
+import uuid
 import datetime
 
 class Emailtemplate(models.Model):

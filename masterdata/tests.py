@@ -1,8 +1,9 @@
 import datetime
 
 from django.test import TestCase
+from django.utils import timezone
 
-from .models import Emailtempalate, Issue, Representative, User
+from .models import Emailtemplate, Issue, Representative, User
 # Create your tests here.
 
 class EmailtemplateModelTests(TestCase):
@@ -13,7 +14,7 @@ class EmailtemplateModelTests(TestCase):
         is in the future.
         """
         time = timezone.now() + datetime.timedelta(days=30)
-        future_template = Emailtempalate(datecreated=time)
+        future_template = Emailtemplate(datecreated=time)
         self.assertIs(future_template.was_published_recently(), False)
 
     def template_has_real_state(self):
@@ -21,7 +22,7 @@ class EmailtemplateModelTests(TestCase):
         states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY",
          "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", 
          "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
-        incorrect_state = Emailtempalate(state=AA)
+        incorrect_state = Emailtemplate(state=AA)
         self.assertIs((incorrect_state.state in states), False)
 
 
@@ -93,7 +94,7 @@ class RepresentativeModelTests(TestCase):
             check = False
         if atIndex is 0:
             check = False
-        if dotIndex = len(incorrect_email.email):
+        if dotIndex is len(incorrect_email.email):
             check = False
         if (dotIndex - atIndex) < 2:
             check = False
@@ -114,7 +115,7 @@ class UserModelTests(TestCase):
             check = False
         if atIndex is 0:
             check = False
-        if dotIndex = len(incorrect_email.email):
+        if dotIndex is len(incorrect_email.email):
             check = False
         if (dotIndex - atIndex) < 2:
             check = False
