@@ -32,6 +32,18 @@ class formTemplate(generic.CreateView):
 class thanksView(generic.TemplateView):
     template_name = 'civic/thankyou.html'
 
+def showFavorite(request):
+    statefilter = ''
+    issuefilter = ''
+    if len(request.GET) > 0:
+        statefilter = ''
+        issuefilter = ''
+    return render(request, 'civic/favoriteTemplates.html', {
+        'templates_all': request.user.clients.favorites.all(),
+        'sfilter' : statefilter ,
+        'ifilter' : issuefilter,
+    })
+
 def formingTemp(request):
     if request.method == "POST":
         form = templateForm(request.POST)
@@ -129,3 +141,26 @@ def update_profile(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
+
+
+def makeFavorite(request, templateid):
+    try:
+        if(templateid == 0 or not request.user.is_authenticated):
+            currenttemplate = None
+        else:
+            currenttemplate = Emailtemplate.objects.get(pk=templateid)
+    except Emailtemplate.DoesNotExist:
+        raise Http404("Template does not exist")
+    request.user.clients.favorites.add(currenttemplate)
+    return HttpResponseRedirect('/'+str(templateid)+'/send')
+
+def unFavorite(request, templateid):
+    try:
+        if(templateid == 0 or not request.user.is_authenticated):
+            currenttemplate = None
+        else:
+            currenttemplate = Emailtemplate.objects.get(pk=templateid)
+    except Emailtemplate.DoesNotExist:
+        raise Http404("Template does not exist")
+    request.user.clients.favorites.remove(currenttemplate)
+    return HttpResponseRedirect('/select')

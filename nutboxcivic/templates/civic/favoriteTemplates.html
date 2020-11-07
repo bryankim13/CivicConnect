@@ -3,7 +3,7 @@
 
 {% block content %}
 	<form action="{% url 'send'%}" method="get">
-	<br>View and Select Templates
+	<br>Your Favorite Templates!
 	<br><br>
 	{% for currenttemplate in templates_all%}
 	<div class="card" style="width: 40rem;">
@@ -13,7 +13,7 @@
     <p class="card-text">{{ currenttemplate.shortDescription }}</p>
 	<a href="{% url 'send' currenttemplate.id %}" class="card-link">View Template</a>
 	{%if user.is_authenticated%}
-		{%if currenttemplate in user.clients.favorites.all%}
+	{%if currenttemplate in user.clients.favorites.all%}
 			<a href="{% url 'unfavorite' currenttemplate.id %}" class="card-link">Unfavorite</a>
 		{%else%}
 		<a href="{% url 'makeFav' currenttemplate.id %}" class="card-link">Favorite</a>
