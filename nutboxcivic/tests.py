@@ -1,6 +1,45 @@
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.urls import reverse
+from django.contrib.auth.models import AnonymousUser, User
+from masterdata.models import Emailtemplate, Issue, Representative, User
+from nutboxcivic import views
+from nutboxcivic import forms
 
+
+class testFavorites(TestCase):
+
+    def setUp(self):
+        # Every test needs access to the request factory.
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(
+            username='jacob', email='jacob@…', password='top_secret')
+
+    
+    def testFavList(self):
+        testTemp = Emailtemplate(title = 'test', id = 1)
+        testTemp.save()
+        request = self.factory.get('/1/makeFav')
+        request.user = self.user
+        response = views.makeFavorite(request,1)
+        self.assertTrue(request.user.clients.favorites.filter(id=1).exists())
+
+    def testUnFav(self):
+        testTemp = Emailtemplate(title = 'test', id = 1)
+        testTemp.save()
+        request = self.factory.get('/1/unfavorite')
+        request.user = self.user
+        request.user.clients.favorites.add(testTemp)
+        response = views.unFavorite(request,1)
+        self.assertFalse(request.user.clients.favorites.filter(id=1).exists())
+    
+    def testInFav(self):
+        testTemp = Emailtemplate(title = 'test', id = 1)
+        testTemp.save()
+        request = self.factory.get('/favorites')
+        request.user = self.user
+        request.user.clients.favorites.add(testTemp)
+        response = views.showFavorite(request)
+        self.assertContains(response, 'test')
 
 class TestPagesDisplay(TestCase):
     # Test home page displays
