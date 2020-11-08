@@ -12,4 +12,39 @@ Profile
  {{ profile_form.as_p }}
  <button type=”submit”>Save changes</button>
 </form>
+
+
+
+<br>
+
+
+<form action="{% url 'profile'%}" method="get">
+    <label for="InputAddress">Enter your address</label>
+    <input type="text" class="form-control" id="InputAddress" name="InputAddress" placeholder="Enter address">
+    <small id="addressHelp" class="form-text text-muted">We won't save your address</small>
+	<input type="submit" class="btn btn-primary"></button>
+</form>
+
+<br>
+{{apistatus}}
+<br>
+<br>
+state
+<br>
+{{state}}
+<br>
+<br>
+district
+<br>
+{{district}}
+<br>
+<br>
+reps
+<br>
+{{reps}}
+
+
+
+
+
 {% endblock %}

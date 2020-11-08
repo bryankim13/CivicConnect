@@ -16,6 +16,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 
+import requests
+import json
 
 import urllib #to encode email templates into url format for the mailto url link
 #urllib.unquote(selectedtemplatecontent.value).decode('utf8')
@@ -137,9 +139,32 @@ def update_profile(request):
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.clients)
+    status = 0
+    state = ''
+    district = ''
+    reps = {}
+    errormessage = ""
+    if len(request.GET) > 0:
+        apireturn = request.GET['InputAddress']
+        spaceremoved = apireturn.replace(' ', '+')
+        response = requests.get('https://www.googleapis.com/civicinfo/v2/representatives?address=' + spaceremoved + '&key=AIzaSyBtQhDMbQxM85h35k2CNEzGpZpCY3o4eDs&levels=country', params=request.GET)
+        apireturn = response.json()
+        status = response.status_code
+        if(status == 200):
+            locationhelp = apireturn['offices'][3]['divisionId']
+            state = locationhelp[locationhelp.find('state:') + 6:locationhelp.find('state:') + 8]
+            district = locationhelp[locationhelp.find('cd:') + 3:locationhelp.find('cd:') + 5]
+            reps = apireturn["officials"]
+        else:
+            errormessage = 'something is wrong with the address, please enter your full address where you want to contact representatives'
     return render(request, 'civic/profile.html', {
         'user_form': user_form,
-        'profile_form': profile_form
+        'profile_form': profile_form,
+        'apireturn' : apireturn,
+        'apistatus' : errormessage,
+        'state' : state,
+        'district' : district,
+        'reps' : reps,
     })
 
 
