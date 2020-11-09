@@ -14,13 +14,13 @@ Profile
 </form>
 <h6>{{apistatus}}</h6>
 <form action="{% url 'profile'%}" method="get">
-    <label for="InputAddress">Enter address of your state, district, and representatives</label>
+    <label for="InputAddress">Enter your address to update your state, district, and representatives</label>
     <input type="text" class="form-control" id="InputAddress" name="InputAddress" placeholder="Enter address">
     <small id="addressHelp" class="form-text text-muted">We won't save this address</small>
-	<input type="submit" class="btn btn-primary"></button>
+	<input type="submit" class="btn btn-primary" value = "Update address"></button>
 </form>
-<h6>State: {{me.state}}</h6>
-<h6>District: {{me.district}}</h6>
+<h6>State: {{me.State}}</h6>
+<h6>District: {{me.District}}</h6>
 
 My Representatives
 

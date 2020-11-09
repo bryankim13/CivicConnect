@@ -152,8 +152,9 @@ def update_profile(request):
         status = response.status_code
         if(status == 200):
             locationhelp = apireturn['offices'][3]['divisionId']
-            me.state = locationhelp[locationhelp.find('state:') + 6:locationhelp.find('state:') + 8]
-            me.district = locationhelp[locationhelp.find('cd:') + 3:locationhelp.find('cd:') + 5]
+            me.State = locationhelp[locationhelp.find('state:') + 6:locationhelp.find('state:') + 8]
+            me.District = locationhelp[locationhelp.find('cd:') + 3:locationhelp.find('cd:') + 5]
+            me.save()
             useremail = ''
             if request.user.is_authenticated:
                 me.representatives.all().delete()
@@ -163,11 +164,11 @@ def update_profile(request):
                     if not Representative.objects.filter(name = temp['name']).exists():
                         repobj = Representative(name=temp['name'], party = temp['party'], email=re.sub("[^a-zA-Z]+", "", temp['name']) + '@us.gov')
                         if i > 1:
-                            repobj.state = me.state
+                            repobj.state = me.State
                         else:
                             repobj.state = ''
                         if i > 3:
-                            repobj.district = me.district
+                            repobj.district = me.District
                         else:
                             repobj.district = ''
                         repobj.save()
