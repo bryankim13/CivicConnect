@@ -11,7 +11,7 @@
     <h5 class="card-title">{{currenttemplate.title}}</h5>
 	<h6 class="card-subtitle mb-2 text-muted">{{currenttemplate.datecreated}}</h6>
     <p class="card-text">{{ currenttemplate.shortDescription }}</p>
-	<a href="{% url 'send' currenttemplate.id %}" class="card-link">View Template</a>
+	<a href="{% url 'send' currenttemplate.id %}" class="card-link">Preview and use template</a>
 	{%if user.is_authenticated%}
 		{%if currenttemplate in user.clients.favorites.all%}
 			<a href="{% url 'unfavorite' currenttemplate.id %}" class="card-link">Unfavorite</a>

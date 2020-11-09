@@ -18,6 +18,7 @@ from django.db import transaction
 
 import requests
 import json
+import re
 
 import urllib #to encode email templates into url format for the mailto url link
 #urllib.unquote(selectedtemplatecontent.value).decode('utf8')
@@ -127,6 +128,7 @@ def gauth(request):
 @login_required
 @transaction.atomic
 def update_profile(request):
+    me = client.objects.get(user = request.user)
     if request.method == 'POST':
         user_form = UserForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.clients)
@@ -140,10 +142,8 @@ def update_profile(request):
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.clients)
     status = 0
-    state = ''
-    district = ''
-    reps = {}
     errormessage = ""
+    reps = ['','','','','']
     if len(request.GET) > 0:
         apireturn = request.GET['InputAddress']
         spaceremoved = apireturn.replace(' ', '+')
@@ -152,19 +152,38 @@ def update_profile(request):
         status = response.status_code
         if(status == 200):
             locationhelp = apireturn['offices'][3]['divisionId']
-            state = locationhelp[locationhelp.find('state:') + 6:locationhelp.find('state:') + 8]
-            district = locationhelp[locationhelp.find('cd:') + 3:locationhelp.find('cd:') + 5]
-            reps = apireturn["officials"]
+            me.state = locationhelp[locationhelp.find('state:') + 6:locationhelp.find('state:') + 8]
+            me.district = locationhelp[locationhelp.find('cd:') + 3:locationhelp.find('cd:') + 5]
+            useremail = ''
+            if request.user.is_authenticated:
+                me.representatives.all().delete()
+                for i in range(5):
+                    temp = apireturn['officials'][i]
+                    reps[i] = temp['name']
+                    if not Representative.objects.filter(name = temp['name']).exists():
+                        repobj = Representative(name=temp['name'], party = temp['party'], email=re.sub("[^a-zA-Z]+", "", temp['name']) + '@us.gov')
+                        if i > 1:
+                            repobj.state = me.state
+                        else:
+                            repobj.state = ''
+                        if i > 3:
+                            repobj.district = me.district
+                        else:
+                            repobj.district = ''
+                        repobj.save()
+                    else:
+                        repobj = Representative.objects.get(name = temp['name'])
+                    me.representatives.add(repobj)
+                    me.save()
+
         else:
             errormessage = 'something is wrong with the address, please enter your full address where you want to contact representatives'
     return render(request, 'civic/profile.html', {
         'user_form': user_form,
         'profile_form': profile_form,
-        'apireturn' : apireturn,
         'apistatus' : errormessage,
-        'state' : state,
-        'district' : district,
-        'reps' : reps,
+        'me' : me,
+        'allreps' : me.representatives.all(),
     })
 
 

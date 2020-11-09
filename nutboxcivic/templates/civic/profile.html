@@ -4,46 +4,45 @@ Profile
 {% endblock %}
 {% block content %}
 <div class="row justify-content-center">
-    <h1>Hi {{ user.first_name }}!</h1>
+    <h2>Hi {{ user.first_name }}!</h2>
 </div>
 <form method="POST">
  {% csrf_token %}
  {{ user_form.as_p }}
- {{ profile_form.as_p }}
+ <!--{{ profile_form.as_p }}-->
  <button type=”submit”>Save changes</button>
 </form>
-
-
-
-<br>
-
-
+<h6>{{apistatus}}</h6>
 <form action="{% url 'profile'%}" method="get">
-    <label for="InputAddress">Enter your address</label>
+    <label for="InputAddress">Enter address of your state, district, and representatives</label>
     <input type="text" class="form-control" id="InputAddress" name="InputAddress" placeholder="Enter address">
-    <small id="addressHelp" class="form-text text-muted">We won't save your address</small>
+    <small id="addressHelp" class="form-text text-muted">We won't save this address</small>
 	<input type="submit" class="btn btn-primary"></button>
 </form>
+<h6>State: {{me.state}}</h6>
+<h6>District: {{me.district}}</h6>
 
-<br>
-{{apistatus}}
-<br>
-<br>
-state
-<br>
-{{state}}
-<br>
-<br>
-district
-<br>
-{{district}}
-<br>
-<br>
-reps
-<br>
-{{reps}}
+My Representatives
 
-
+{% for currentrep in allreps %}
+	<div class="card" style="width: 40rem;">
+	<div class="card-body">
+    <h5 class="card-title">{{currentrep.name}}</h5>
+	<h6 class="card-subtitle mb-2 text-muted">{{currentrep.party}}</h6>
+	{%if user.is_authenticated%}
+		{%if currentrep.state != ''%}
+			<p class="card-text">{{currentrep.state}}</p>
+		{%endif%}
+		{%if currentrep.district != ''%}
+			<p class="card-text">{{currentrep.district}}</p>
+		{%endif%}
+	{%endif%}
+	<a href= "https://api.time.com/wp-content/uploads/2019/01/gettyimages-914246230.jpg" class="card-link">Send an email to this representative</a>
+	
+	
+	
+	</div>
+{% endfor %}
 
 
 

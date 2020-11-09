@@ -47,8 +47,9 @@ class Representative(models.Model):
 class client(models.Model):
     user = models.OneToOneField(User,related_name='clients',unique=True,null=False, db_index=True,on_delete=models.CASCADE)
     State = models.CharField(max_length = 2)
+    District = models.CharField(max_length= 5, default= '')
     issues = models.ForeignKey(Issue,blank = True,null=True, on_delete=models.CASCADE)
-    representatives = models.ForeignKey(Representative,blank = True,null=True, on_delete=models.CASCADE)
+    representatives = models.ManyToManyField(Representative)
     favorites  = models.ManyToManyField(Emailtemplate)
 
     def __str__(self):

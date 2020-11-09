@@ -8,25 +8,33 @@ Contact Representative - CivicConnect
 	<div class="row justify-content-center">
 		<h1>{{ "Contact Representative" }}</h1>
 	</div>
-
-	<div class="row justify-content-center">
-	<form action="{% url 'send'%}" method="get">
-		{% if generatedlink != '' %}
-			<a href='{{generatedlink}}'>{{ 'Click here to send your email' }}</a>
-		{% endif %}
+	<br>
+	<a href="{% url 'select' %}" class="card-link">Select template</a>
+	<br>
+	{% if generatedlink != '' %}
 		<br>
-		<label for="templatelist">Choose your template: </label>
-		<select name='templatedropdown' id="templatelist" class="mdb-select md-form">
-			<option value='' disabled selected hidden>---</option>
-			{% for selectedtemplate in templates_all%}
-				<option value= '{{selectedtemplate.id}}' >
-					{{ selectedtemplate.title }}  :  {{ selectedtemplate.shortDescription }}
-				</option>
-			{% endfor %}
-		</select>
-	
-		<input type="submit" value="Select">
-	</form>
+		<a href='{{generatedlink}}'>Click here to send your email</a>
+		<br>
+	{% endif %}
+	<div class="row justify-content-center">
+	<!--<form action="{% url 'send'%}" method="get">
+		<br>
+			<label for="templatelist">Choose your representative: </label>
+			<select name='templatedropdown' id="templatelist" class="mdb-select md-form">
+				<option value='' disabled selected hidden>---</option>
+					<option value= '' >
+						none
+					</option>
+				{% for rep in reps_all%}
+					<option value= '{{rep.email}}' >
+						{{ rep.name }}  :  {{ rep.party }}
+					</option>
+				{% endfor %}
+				<input type="text" name="htmlid" value= '{{templateidvar}}' readonly>
+			</select>
+				
+			<input type="submit" value="Select">
+	</form>-->
 	</div>
 
 	<div class="row justify-content-center">
