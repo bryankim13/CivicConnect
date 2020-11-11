@@ -1,7 +1,7 @@
 from django.test import TestCase, RequestFactory
 from django.urls import reverse
 from django.contrib.auth.models import User #,AnonymousUser
-from masterdata.models import Emailtemplate, Issue, Representative, User
+from masterdata.models import Emailtemplate, Issue, Representative, client
 from nutboxcivic import views
 from nutboxcivic import forms
 
