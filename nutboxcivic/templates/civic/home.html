@@ -1,17 +1,51 @@
 {% extends 'civic/base.html' %}
 
 {% block title %}
-	CivicConnect
+  CivicConnect
 {% endblock %}
 
 {% block content %}
-	<div class="row justify-content-center">
-		<h1>{{ "Making Your Voice Heard." }}</h1>
-	</div>
+  <div class="row justify-content-center">
+    <div class="jumbotron" style="border-radius:1em">
+      <div class="row justify-content-center">
+        <h1 style="font-size:4em">{{ "Making Your Voice Heard." }}</h1>
+      </div>
+      <p> Here at CivicConnect, we believe that every American citizen has a right to be heard. We put you in direct contact with your Congressional representative so that you can speak your mind. We strive to help citizens achieve the change they want to see in the United States.</p>
+    </div>
+  </div>
 
-	<div class="content container col-md-8 justify-content-center mt-3">
-		<div class="row justify-content-center">
-			<a class="nav-link" href="{% url 'send' %}">{{ 'Contact representatives by clicking here' }}</a>
-		</div>
-	</div>
+  <div class="row justify-content-center">
+    <h2>New Templates</h2>
+  </div>
+
+  <div class="content container col-md-8 justify-content-center mt-3">
+    <div class="row justify-content-center">
+      {% for currenttemplate in templates_all%}
+        <div class="card" style="width: 40rem; margin-bottom:2em">
+          <div class="card-body">
+            <h5 class="card-title">{{currenttemplate.title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{currenttemplate.datecreated}}</h6>
+            <p class="card-text">{{ currenttemplate.shortDescription }}</p>
+            <a href="{% url 'send' currenttemplate.id %}" class="card-link">Preview and use template</a>
+            {%if user.is_authenticated%}
+              {%if currenttemplate in user.clients.favorites.all%}
+                <a href="{% url 'unfavorite' currenttemplate.id %}" class="card-link">Unfavorite</a>
+              {%else%}
+                <a href="{% url 'makeFav' currenttemplate.id %}" class="card-link">Favorite</a>
+              {%endif%}
+            {%endif%}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {%if user.is_authenticated%}
+    <div class="content container col-md-8 justify-content-center mt-3">
+      <div class="row justify-content-center">
+        <a class="nav-link" href="{% url 'favorite' %}">Your Favorite Templates</a>
+      </div>
+    </div>
+  {% endif %}
+
 {% endblock %}

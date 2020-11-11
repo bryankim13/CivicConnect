@@ -24,8 +24,11 @@ import urllib #to encode email templates into url format for the mailto url link
 #urllib.unquote(selectedtemplatecontent.value).decode('utf8')
 
 
-class homeView(generic.TemplateView):
+def homeView(request):
     template_name = 'civic/home.html'
+    return render(request, template_name, {
+        'templates_all': Emailtemplate.objects.all().order_by('-datecreated')[:5],
+    })
 
 class formTemplate(generic.CreateView):
     form_class = templateForm
