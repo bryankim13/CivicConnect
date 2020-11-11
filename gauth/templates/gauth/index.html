@@ -4,19 +4,37 @@
 {% block title %}Google Registration{% endblock %}
 
 {% block content %}
-	<div class="row justify-content-center">
-		<h1>{{ "Login" }}</h1>
-	</div>
-
+<div class="row justify-content-center mt-3">
 	<div class="content container col-md-8 mt-5">
 		<div class="row">
 			{% if user.is_authenticated %}
-				<p>Welcome, {{ user.username }}!</p>
+			<div>
+				<div class="row justify-content-center mt-3">
+				<div class="jumbotron" style="border-radius:1em">
+					<div class="row justify-content-center">
+					</div>
+					<h1>Welcome {{ user.first_name }}!</h1>
+				  </div>
+				</div>
+				<div class="row justify-content-center mt-3">
+					<p>
+						<a class="nav-link" href="{% url 'profile' %}">
+							{{ 'Edit Your Profile' }}
+						</a>
+						<a class="nav-link" href="{% url 'home' %}">
+							{{ 'See the latest Updates' }}
+						</a>
+					</p>
+				</div>
+			</div>
 			{% else %}
+			<div class="row justify-content-center">
+				<h1>{{ "Login Here" }}</h1>
+				<br>
 				<a href="{% provider_login_url 'google' %}">Login with Google</a>
+			</div>
 			{% endif %}
 		</div>
 	</div>
+</div>
 {% endblock %}
-
-
