@@ -60,6 +60,8 @@ def formingTemp(request):
 
 
 def usetemplate(request, templateid):
+    linkornot = 0
+    me = client.objects.get(user = request.user)
     try:
         if(templateid == 0):
             currenttemplate = None
@@ -76,10 +78,11 @@ def usetemplate(request, templateid):
          #   'chosentemplate' : request.GET ,
           #  })
     #else:
+    currenttemplateid = templateid
     selectedtemplatecontent = ''
     link = ''
     templateobject = None
-    emails = 'leyew99290@ofdyn.com' # a temporary email 
+    emails = '' # no email selected 
     if(templateid is not None):
         templateobject = Emailtemplate.objects.get(id = templateid)
         selectedtemplatecontent = templateobject.contentTemp
@@ -87,19 +90,31 @@ def usetemplate(request, templateid):
     if len(request.GET) > 0:
         selectedtemplateid = '' #placeholder code
     return render(request, 'civic/send.html', {
-        'templates_all': Emailtemplate.objects.all(),
+        'reps_all': me.representatives.all(),
         'chosentemplate' : selectedtemplatecontent ,
         'generatedlink' : link,
+        'chosenrep' : '',
+        'templateidvar' : currenttemplateid,
+        'linkornot' : linkornot,
     })
 
 def usetemplatenoid(request):
+    me = client.objects.get(user = request.user)
+    linkornot = 1
     selectedtemplatecontent = ''
     link = ''
-    emails = 'leyew99290@ofdyn.com' # a temporary email    
+    if request.method == 'GET' and 'repdropdown' in request.GET and 'htmlid' in request.GET:
+        linkornot = 0
+        templateobject = Emailtemplate.objects.get(id = request.GET.get('htmlid'))
+        selectedtemplatecontent = templateobject.contentTemp
+        link = 'mailto:' + request.GET.get('repdropdown') + '?cc=&subject=' + urllib.parse.quote(templateobject.subject) + '&body=' + urllib.parse.quote(selectedtemplatecontent)  
     return render(request, 'civic/send.html', {
-        'templates_all': Emailtemplate.objects.all(),
+        'reps_all': me.representatives.all(),
         'chosentemplate' : selectedtemplatecontent ,
+        'chosenrep' : request.GET.get('repdropdown'),
         'generatedlink' : link,
+        'templateidvar' : request.GET.get('htmlid'),
+        'linkornot' : linkornot,
     })
 
 def selecttemplate(request):

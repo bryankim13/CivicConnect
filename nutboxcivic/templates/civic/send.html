@@ -8,13 +8,28 @@ Contact Representative - CivicConnect
 	<div class="row justify-content-center">
 		<h1>{{ "Contact Representative" }}</h1>
 	</div>
-	{% comment %}<a href="{% url 'select' %}" class="card-link">Select template</a>{% endcomment %}
+	
+	
+	
+	
+	
+	
+	
+	
 	<div class="row justify-content-center">
-	<!--<form action="{% url 'send'%}" method="get">
+	
+	
+	
+	<form action="{% url 'send'%}" method="get">
+			{% if linkornot == 1 %}
+				<br>
+				<a href="{% url 'select' %}" class="card-link"><h5>Select template</h5></a>
+			{% endif %}
 		<br>
-			<label for="templatelist">Choose your representative: </label>
-			<select name='templatedropdown' id="templatelist" class="mdb-select md-form">
-				<option value='' disabled selected hidden>---</option>
+			{% if linkornot == 0 %}
+			<label for="replist">Choose your representative: </label>
+			<select name='repdropdown' id="replist" class="mdb-select md-form">
+				<option value='{{chosenrep}}' disabled selected hidden>{{chosenrep}}</option>
 					<option value= '' >
 						none
 					</option>
@@ -23,16 +38,21 @@ Contact Representative - CivicConnect
 						{{ rep.name }}  :  {{ rep.party }}
 					</option>
 				{% endfor %}
-				<input type="text" name="htmlid" value= '{{templateidvar}}' readonly>
+				<input hidden type="text" name="htmlid" value= '{{templateidvar}}'>
 			</select>
 				
 			<input type="submit" value="Select">
-	</form>-->
+			{% endif %}
+	</form>
+	
+	
+	
+	
 	</div>
 
 	<div class="row justify-content-center">
 		<h3>Template Preview</h3>
-		<textarea class="form-control" id="emailpreview" rows="16">{{chosentemplate}}</textarea>
+		<textarea class="form-control" id="emailpreview" rows="16" readonly>{{chosentemplate}}</textarea>
 		<button class="btn btn-primary mt-4 mr-2" onclick="copy()">Copy text</button>
 
 		{% if generatedlink != '' %}
@@ -48,5 +68,7 @@ Contact Representative - CivicConnect
 			document.execCommand("copy");
 		}
 	</script>
+	
+	{{temp}}
 	
 {% endblock %}
