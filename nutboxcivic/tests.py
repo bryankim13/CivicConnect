@@ -42,6 +42,14 @@ class testFavorites(TestCase):
         self.assertContains(response, 'test')
 
 class TestPagesDisplay(TestCase):
+
+    def setUp(self):
+        # Every test needs access to the request factory.
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(
+            username='jacob', email='jacob@…', password='top_secret')
+
+
     # Test home page displays
     def test_home(self):
         url = reverse('home')
@@ -51,9 +59,16 @@ class TestPagesDisplay(TestCase):
     # Test send page displays
     def test_send(self):
         url = reverse('send')
-        response = self.client.get(url)
-        self.assertContains(response, "Template Preview")
-        self.assertContains(response, "Copy text")
+        request = self.factory.get(url)
+        request.user = self.user
+        #response = request.user.clients.get(url)
+        response = views.usetemplatenoid(request)
+        if self.user.is_authenticated:
+            self.assertContains(response, "Template Preview")
+            self.assertContains(response, "Copy text")
+        else:
+            self.assertContains(response, "Please sign in")
+
 
     # Test create template page displays
     def test_createTemplate(self):
