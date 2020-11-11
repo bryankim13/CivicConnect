@@ -14,7 +14,7 @@ class testFavorites(TestCase):
         self.user = User.objects.create_user(
             username='jacob', email='jacob@…', password='top_secret')
 
-    
+            
     def testFavList(self):
         testTemp = Emailtemplate(title = 'test', id = 1)
         testTemp.save()
