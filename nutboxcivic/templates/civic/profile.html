@@ -4,17 +4,22 @@ Profile
 {% endblock %}
 {% block content %}
 <div class="row justify-content-center">
-    <h2>Hi {{ user.first_name }}!</h2>
+	<h2>Need to change something {{ user.first_name }}?</h2>
 </div>
+<br>
+<div class="row justify-content-center">
+	<h3> Edit Your Profile</h3>
+</div>
+<br>
 <form method="POST">
  {% csrf_token %}
  {{ user_form.as_p }}
  <!--{{ profile_form.as_p }}-->
- <button type=”submit”>Save changes</button>
+ <input type="submit" class="btn btn-primary" value = "Update Profile"></button>
 </form>
 <h6>{{apistatus}}</h6>
 <form action="{% url 'profile'%}" method="get">
-    <label for="InputAddress">Enter your address to update your state, district, and representatives</label>
+    <label for="InputAddress">Enter your address to find/update your State, District, and Representatives!</label>
     <input type="text" class="form-control" id="InputAddress" name="InputAddress" placeholder="Enter address">
     <small id="addressHelp" class="form-text text-muted">We won't save this address</small>
 	<input type="submit" class="btn btn-primary" value = "Update address"></button>
