@@ -1,6 +1,6 @@
 from django.test import TestCase, RequestFactory
 from django.urls import reverse
-from django.contrib.auth.models import AnonymousUser, User
+from django.contrib.auth.models import User #,AnonymousUser
 from masterdata.models import Emailtemplate, Issue, Representative, User
 from nutboxcivic import views
 from nutboxcivic import forms
