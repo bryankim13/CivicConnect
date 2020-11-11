@@ -42,7 +42,7 @@ My Representatives
 					<p class="card-text">{{currentrep.district}}</p>
 				{%endif%}
 			{%endif%}
-			<a href= "https://api.time.com/wp-content/uploads/2019/01/gettyimages-914246230.jpg" class="card-link">Send an email to this representative</a>
+			{%comment%}<a href= "{% url 'send' currentrep.email %}" class="card-link">Send an email to this representative</a>{%endcomment%}
 		</div>
 	</div>
 {% endfor %}

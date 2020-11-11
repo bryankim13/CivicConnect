@@ -22,11 +22,16 @@ Contact Representative - CivicConnect
 	
 	<form action="{% url 'send'%}" method="get">
 			{% if linkornot == 1 %}
-				<br>
-				<a href="{% url 'select' %}" class="card-link"><h5>Select template</h5></a>
+				{% if chosenrep %}
+					<br>
+					<a href="{% url 'select' chosenrep %}" class="card-link"><h5>Select template</h5></a>
+				{% else %}
+					<br>
+					<a href="{% url 'select' %}" class="card-link"><h5>Select template</h5></a>
+				{% endif %}
 			{% endif %}
 		<br>
-			{% if linkornot == 0 %}
+			
 			<label for="replist">Choose your representative: </label>
 			<select name='repdropdown' id="replist" class="mdb-select md-form">
 				<option value='{{chosenrep}}' disabled selected hidden>{{chosenrep}}</option>
@@ -42,7 +47,7 @@ Contact Representative - CivicConnect
 			</select>
 				
 			<input type="submit" value="Select">
-			{% endif %}
+			
 	</form>
 	
 	

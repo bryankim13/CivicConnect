@@ -26,6 +26,7 @@ urlpatterns = [
     path('send/', views.usetemplatenoid, name = 'send'),
     path('<templateid>/send/', views.usetemplate, name = 'send'),
     path('select/', views.selecttemplate, name = "select"),
+    path('<selectedrep>/select/', views.selecttemplatetwo, name = "select"),
     path('createTemplate', views.formTemplate.as_view(), name = 'createTemp'),
     path('creatingTemplate', views.formingTemp, name = 'creatingTemp'),
     path('thanksforsubmitting', views.thanksView.as_view(), name = 'thanksSubmit'),

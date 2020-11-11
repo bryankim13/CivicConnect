@@ -60,8 +60,16 @@ def formingTemp(request):
 
 
 def usetemplate(request, templateid):
-    linkornot = 0
     me = client.objects.get(user = request.user)
+    if not templateid.isnumeric():
+        return render(request, 'civic/send.html', {
+            'reps_all': me.representatives.all(),
+            'chosentemplate' : '' ,
+            'generatedlink' : '',
+            'chosenrep' : templateid,
+            'linkornot' : 1,
+        })
+    linkornot = 0
     try:
         if(templateid == 0):
             currenttemplate = None
@@ -104,10 +112,11 @@ def usetemplatenoid(request):
     selectedtemplatecontent = ''
     link = ''
     if request.method == 'GET' and 'repdropdown' in request.GET and 'htmlid' in request.GET:
-        linkornot = 0
-        templateobject = Emailtemplate.objects.get(id = request.GET.get('htmlid'))
-        selectedtemplatecontent = templateobject.contentTemp
-        link = 'mailto:' + request.GET.get('repdropdown') + '?cc=&subject=' + urllib.parse.quote(templateobject.subject) + '&body=' + urllib.parse.quote(selectedtemplatecontent)  
+        if(request.GET.get('htmlid') is not ''):
+            linkornot = 0
+            templateobject = Emailtemplate.objects.get(id = request.GET.get('htmlid'))
+            selectedtemplatecontent = templateobject.contentTemp
+            link = 'mailto:' + request.GET.get('repdropdown') + '?cc=&subject=' + urllib.parse.quote(templateobject.subject) + '&body=' + urllib.parse.quote(selectedtemplatecontent)  
     return render(request, 'civic/send.html', {
         'reps_all': me.representatives.all(),
         'chosentemplate' : selectedtemplatecontent ,
@@ -127,6 +136,19 @@ def selecttemplate(request):
         'templates_all': Emailtemplate.objects.all(),
         'sfilter' : statefilter ,
         'ifilter' : issuefilter,
+    })
+
+def selecttemplatetwo(request, selectedrep):
+    statefilter = ''
+    issuefilter = ''
+    if len(request.GET) > 0:
+        statefilter = ''
+        issuefilter = ''
+    return render(request, 'civic/templateselection.html', {
+        'templates_all': Emailtemplate.objects.all(),
+        'sfilter' : statefilter ,
+        'ifilter' : issuefilter,
+        'chosenrep' : selectedrep,
     })
 
 def logout_request(request):
