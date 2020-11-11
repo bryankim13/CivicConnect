@@ -155,7 +155,7 @@ def update_profile(request):
             profile_form.save()
             return HttpResponseRedirect('/')
         else:
-            messages.error(request, ('Please correct the error below.'))
+            messages.error(request, _('Please correct the error below.'))
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.clients)
