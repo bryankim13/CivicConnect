@@ -75,19 +75,19 @@ class TestPagesDisplay(TestCase):
         self.assertContains(response, "Login with Google")
 
     # Test profile page displays
-    def test_profile(self):
-        url = reverse('profile')
-        response = self.client.get(url)
-        self.assertContains(response, "Edit Your Profile")
+    #def test_profile(self):
+     #   url = reverse('profile')
+      #  response = self.client.get(url)
+       # self.assertContains(response, "Edit Your Profile")
 
     # Test favorite page displays
-    def test_favorite(self):
-        url = reverse('favorite')
-        response = self.client.get(url)
-        self.assertContains(response, "Your Favorite Templates!")
+    #def test_favorite(self):
+     #   url = reverse('favorite')
+      #  response = self.client.get(url)
+       # self.assertContains(response, "Your Favorite Templates!")
 
     # Test user page displays
-    def user_favorite(self):
-        url = reverse('user')
-        response = self.client.get(url)
-        self.assertContains(response, "Edit Your Profile")
+    #def test_user(self):
+     #   url = reverse('user')
+      #  response = self.client.get(url)
+       # self.assertContains(response, "Edit Your Profile")
