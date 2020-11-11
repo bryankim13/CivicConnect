@@ -5,6 +5,18 @@ Contact Representative - CivicConnect
 {% endblock %}
 
 {% block content %}
+	
+	{% if noclient %}
+			<br><br>
+			<a class="btn btn-primary mt-4 ml-2" role="button" href="{% url 'gauth' %}">Please sign in</a>
+	{% endif %}
+
+
+
+
+	{% if not noclient %}
+
+
 	<div class="row justify-content-center">
 		<h1>{{ "Contact Representative" }}</h1>
 	</div>
@@ -69,6 +81,6 @@ Contact Representative - CivicConnect
 		}
 	</script>
 	
-	{{temp}}
+	{% endif %}
 	
 {% endblock %}

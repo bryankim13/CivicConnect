@@ -60,6 +60,10 @@ def formingTemp(request):
 
 
 def usetemplate(request, templateid):
+    if not request.user.is_authenticated:
+        return render(request, 'civic/send.html', {
+        'noclient': True,
+    })
     linkornot = 0
     me = client.objects.get(user = request.user)
     try:
@@ -99,6 +103,10 @@ def usetemplate(request, templateid):
     })
 
 def usetemplatenoid(request):
+    if not request.user.is_authenticated:
+        return render(request, 'civic/send.html', {
+        'noclient': True,
+    })
     me = client.objects.get(user = request.user)
     linkornot = 1
     selectedtemplatecontent = ''
