@@ -4,9 +4,9 @@ userindex
 {% endblock %}
 
 {% block content %}
-	<div class="row justify-content-right">
+	{% comment %}<div class="row justify-content-right">
 		<h1>Profile Settings</h1>
-	</div>
+	</div>{% endcomment %}
 	<div class="row justify-content-center mt-3">
 		<h1>Hello, {{user.first_name}}</h1>
 	</div>
@@ -14,15 +14,15 @@ userindex
 <div class="row justify-content-center mt-3">
 	<p>
 		<a class="nav-link" href="{% url 'profile' %}">
-			{{ 'Edit My Profile' }}
+			{{ 'Edit Your Profile' }}
 		</a>
 		<a class="nav-link" href="{% url 'favorite' %}">
-			{{ 'My Favorites' }}
-		</a>
-		<a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-			{{ 'My Issues' }}
+			{{ 'Your Favorites' }}
 		</a>
 		<!-- <a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+			{{ 'My Issues' }}
+		</a>
+		<a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
 			{{ 'My Representatives' }}
 		</a>
 		<a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">

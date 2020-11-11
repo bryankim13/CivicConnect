@@ -21,7 +21,7 @@ from nutboxcivic import views
 from .views import homeView
 
 urlpatterns = [
-    path('', homeView.as_view(), name='home'),
+    path('', views.homeView, name='home'),
     path('admin/', admin.site.urls),
     path('send/', views.usetemplatenoid, name = 'send'),
     path('<templateid>/send/', views.usetemplate, name = 'send'),

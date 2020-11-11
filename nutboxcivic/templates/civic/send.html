@@ -8,14 +8,7 @@ Contact Representative - CivicConnect
 	<div class="row justify-content-center">
 		<h1>{{ "Contact Representative" }}</h1>
 	</div>
-	<br>
-	<a href="{% url 'select' %}" class="card-link">Select template</a>
-	<br>
-	{% if generatedlink != '' %}
-		<br>
-		<a href='{{generatedlink}}'>Click here to send your email</a>
-		<br>
-	{% endif %}
+	{% comment %}<a href="{% url 'select' %}" class="card-link">Select template</a>{% endcomment %}
 	<div class="row justify-content-center">
 	<!--<form action="{% url 'send'%}" method="get">
 		<br>
@@ -39,8 +32,12 @@ Contact Representative - CivicConnect
 
 	<div class="row justify-content-center">
 		<h3>Template Preview</h3>
-		<textarea class="form-control" id="emailpreview" rows="20">{{chosentemplate}}</textarea>
-		<button class="btn btn-primary mt-2" onclick="copy()">Copy text</button>
+		<textarea class="form-control" id="emailpreview" rows="16">{{chosentemplate}}</textarea>
+		<button class="btn btn-primary mt-4 mr-2" onclick="copy()">Copy text</button>
+
+		{% if generatedlink != '' %}
+			<a class="btn btn-primary mt-4 ml-2" role="button" href='{{generatedlink}}'>Send Email</a>
+		{% endif %}
 	</div>
 
 	<script>
