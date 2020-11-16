@@ -10,9 +10,9 @@ userindex
 
 	<div class="jumbotron" class="row justify-content-right" style="border-radius:1em">
 		<div class="row justify-content-center">
-		<h1 style="font-size:4em" >Hello, {{user.first_name}}</h1>
+		<h1 style="font-size:2em" >Hello, {{user.first_name}}</h1>
 		</div>
-		<p style="font-size:2em"> Here at Civic Connect, our plan is to get you to connect with your fellow representatives and build a conversation on the events of Today! View your favorite templates here or Edit your Profile!
+		<p style="font-size:1em"> Here at Civic Connect, our plan is to get you to connect with your fellow representatives and build a conversation on the events of Today! View your favorite templates here or Edit your Profile!
 		</p>
 	  </div>
 	<div>
@@ -23,12 +23,10 @@ userindex
 
 <div class="row justify-content-center mt-3">
 	<p>
-		<a class="nav-link" href="{% url 'profile' %}">
-			{{ 'Edit Your Profile' }}
-		</a>
-		<a class="nav-link" href="{% url 'favorite' %}">
-			{{ 'Your Favorites' }}
-		</a>
+		<a class="btn btn-primary" href="{% url 'profile' %}" role="button">Edit Your Profile</a>
+		<br><br>
+		<a class="btn btn-primary" href="{% url 'favorite' %}" role="button">Your Favorites</a>
+
 		<!-- <a class="nav-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
 			{{ 'My Issues' }}
 		</a>

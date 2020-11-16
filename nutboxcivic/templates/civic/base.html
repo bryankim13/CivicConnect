@@ -20,11 +20,12 @@
 
 		<div class="ml-auto text-light" style="font-size:1.2em">
 			{% if user.is_authenticated %}
-				<a class="text-light" href="{% url 'user:userindex' %}">{{ user.email }}</a>
-				<a class="text-light" href="{% url 'logout' %}">Log out</a>
+				signed in as {{ user.email }}
+				<a class="btn btn-outline-light" href="{% url 'profile' %}" role="button">Profile</a>
+				<a class="btn btn-outline-light" href="{% url 'logout' %}" role="button">Log out</a>
 			{% else %}
 				Not signed in
-				<a class="text-light" href="{% url 'gauth' %}">Sign in</a>
+				<a class="btn btn-outline-light" href="{% url 'gauth' %}" role="button">Sign in</a>
 			{% endif %}
 		</div>
 	</nav>
@@ -34,14 +35,13 @@
 		{% endblock %}
 	</div>
 
-	<div style="height:5em"></div>
-
-	<div class="navbar justify-content-center text-muted" style="margin-bottom:-1em">
+	<div style="height:6em"></div>
+	<div class="navbar navbar-light justify-content-center" style="background-color: #2c44b0;margin-bottom:-1em; color:white">
 		<p> NutBox:
-			<a class="text-muted" href="mailto:pcb8gb@virginia.edu">Penn Bauman</a>,
-			<a class="text-muted" href="mailto:bjk3yf@virginia.edu">Bryan Kim</a>,
-			<a class="text-muted" href="mailto:crm6zg@virginia.edu">Cameron Mukerjee</a>, &amp;
-			<a class="text-muted" href="mailto:awz6ay@virginia.edu">Andrew Zhao</a>
+			<a class="text" href="mailto:pcb8gb@virginia.edu" style="color: white" >Penn Bauman</a>,
+			<a class="text" href="mailto:bjk3yf@virginia.edu" style="color: white" >Bryan Kim</a>,
+			<a class="text" href="mailto:crm6zg@virginia.edu" style="color: white" >Cameron Mukerjee</a>, &amp;
+			<a class="text" href="mailto:awz6ay@virginia.edu" style="color: white" >Andrew Zhao</a>
 		</p>
 	</div>
 </body>
