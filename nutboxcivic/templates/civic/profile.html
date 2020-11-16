@@ -17,9 +17,9 @@ Profile
  <!--{{ profile_form.as_p }}-->
  <input type="submit" class="btn btn-primary" value = "Update Profile"></button>
 </form>
-<h6>{{apistatus}}</h6>
+<h5 style="color:#ad1400; font-weight:bold">{{apistatus}}</h5>
 <form action="{% url 'profile'%}" method="get">
-    <label for="InputAddress">Enter your address to find/update your State, District, and Representatives!</label>
+    <label for="InputAddress">Enter an address to update your State, District, and Representatives!</label>
     <input type="text" class="form-control" id="InputAddress" name="InputAddress" placeholder="Enter address">
     <small id="addressHelp" class="form-text text-muted">We won't save this address</small>
 	<input type="submit" class="btn btn-primary" value = "Update address"></button>

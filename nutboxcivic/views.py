@@ -179,34 +179,39 @@ def update_profile(request):
         apireturn = response.json()
         status = response.status_code
         if(status == 200):
-            locationhelp = apireturn['offices'][3]['divisionId']
-            me.State = locationhelp[locationhelp.find('state:') + 6:locationhelp.find('state:') + 8]
-            me.District = locationhelp[locationhelp.find('cd:') + 3:locationhelp.find('cd:') + 5]
-            me.save()
-            useremail = ''
-            if request.user.is_authenticated:
-                me.representatives.all().delete()
-                for i in range(5):
-                    temp = apireturn['officials'][i]
-                    reps[i] = temp['name']
-                    if not Representative.objects.filter(name = temp['name']).exists():
-                        repobj = Representative(name=temp['name'], party = temp['party'], email=re.sub("[^a-zA-Z]+", "", temp['name']) + '@us.gov')
-                        if i > 1:
-                            repobj.state = me.State
-                        else:
-                            repobj.state = ''
-                        if i > 3:
-                            repobj.district = me.District
-                        else:
-                            repobj.district = ''
-                        repobj.save()
-                    else:
-                        repobj = Representative.objects.get(name = temp['name'])
-                    me.representatives.add(repobj)
+            if len(apireturn['offices']) > 3:
+                if 'cd:' in apireturn['offices'][3]['divisionId']:
+                    locationhelp = apireturn['offices'][3]['divisionId']
+                    me.State = locationhelp[locationhelp.find('state:') + 6:locationhelp.find('state:') + 8]
+                    me.District = locationhelp[locationhelp.find('cd:') + 3:locationhelp.find('cd:') + 5]
                     me.save()
-
+                    useremail = ''
+                    if request.user.is_authenticated:
+                        me.representatives.all().delete()
+                        for i in range(5):
+                            temp = apireturn['officials'][i]
+                            reps[i] = temp['name']
+                            if not Representative.objects.filter(name = temp['name']).exists():
+                                repobj = Representative(name=temp['name'], party = temp['party'], email=re.sub("[^a-zA-Z]+", "", temp['name']) + '@us.gov')
+                                if i > 1:
+                                    repobj.state = me.State
+                                else:
+                                    repobj.state = ''
+                                if i > 3:
+                                    repobj.district = me.District
+                                else:
+                                    repobj.district = ''
+                                repobj.save()
+                            else:
+                                repobj = Representative.objects.get(name = temp['name'])
+                            me.representatives.add(repobj)
+                            me.save()
+                    else:
+                        errormessage = 'the address is not specific enough, please enter a full address where you want to contact representatives (it does not need to be your address)'
+            else:
+                    errormessage = 'the address is not specific enough, please enter a full address where you want to contact representatives (it does not need to be your address)'
         else:
-            errormessage = 'something is wrong with the address, please enter your full address where you want to contact representatives'
+            errormessage = 'something is wrong with the address, please enter a full address where you want to contact representatives (it does not need to be your address)'
     return render(request, 'civic/profile.html', {
         'user_form': user_form,
         'profile_form': profile_form,

@@ -178,3 +178,6 @@ django_heroku.settings(locals(), test_runner=False)
 # Database Ignore SSL locally
 options = DATABASES['default'].get('OPTIONS', {})
 options.pop('sslmode', None)
+
+
+CSRF_COOKIE_SECURE = True
