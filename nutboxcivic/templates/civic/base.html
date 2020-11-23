@@ -15,8 +15,8 @@
 		<div class="collapse navbar-collapse" id="">
 			{% comment %}<a class="nav-link text-light" style="font-size:1.2em" href="{% url 'send' %}">{{ 'Contact Representatives' }}</a>{% endcomment %}
 			<a class="nav-link text-light" style="font-size:1.2em" href="{% url 'select' %}">{{ 'Select Template' }}</a>
-			<a class="nav-link text-light" style="font-size:1.2em" href="{% url 'createTemp' %}">{{ 'Create A Template' }}</a>
 			{% if user.is_authenticated %}
+			<a class="nav-link text-light" style="font-size:1.2em" href="{% url 'createTemp' %}">{{ 'Create A Template' }}</a>
 			<a class="nav-link text-light" style="font-size:1.2em" href="{% url 'favorite' %}">{{ 'Your Favorite Templates' }}</a>
 			{% endif %}
 
