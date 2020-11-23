@@ -13,11 +13,11 @@ class templateForm(forms.ModelForm):
             'state' : forms.TextInput(attrs = {'class' : 'form-control'}),
         }
         labels = {
-            "title": "Email template title",
-            'shortDescription' : "Short description of the email template",
-            'subject' : "Subject of the email",
-            'contentTemp' : "Body of the email",
-            'state' : "Relevant State for the contents of the email template",
+            "title": "Template Title:",
+            'shortDescription' : "Short Description:",
+            'subject' : "Email Subject:",
+            'contentTemp' : "Email Body:",
+            'state' : "Relevant state (e.g., VA):",
         }
 
 class UserForm(forms.ModelForm):
