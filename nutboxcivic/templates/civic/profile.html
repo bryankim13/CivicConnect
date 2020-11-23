@@ -24,26 +24,35 @@ Profile
     <small id="addressHelp" class="form-text text-muted">We won't save this address</small>
 	<input type="submit" class="btn btn-primary" value = "Update address"></button>
 </form>
-<h6>State: {{me.State}}</h6>
+<h6>State: {{me.State | upper}}</h6>
 <h6>District: {{me.District}}</h6>
 
 My Representatives
 
 {% for currentrep in allreps %}
+	{% comment %}{%if currentrep.state != ''%}{% endcomment %}
 	<div class="card" style="width: 40rem; margin-bottom:1em">
 		<div class="card-body">
 			<h5 class="card-title">{{currentrep.name}}</h5>
 			<h6 class="card-subtitle mb-2 text-muted">{{currentrep.party}}</h6>
+			<p class="card-text">{{currentrep.}}
 			{%if user.is_authenticated%}
 				{%if currentrep.state != ''%}
-					<p class="card-text">{{currentrep.state}}</p>
+					{%if currentrep.district != ''%}
+						House Representative:
+					{%else%}
+						Senator:
+					{%endif%}
+					{{currentrep.state | upper}}
 				{%endif%}
 				{%if currentrep.district != ''%}
-					<p class="card-text">{{currentrep.district}}</p>
+					- {{currentrep.district}}
 				{%endif%}
 			{%endif%}
+			</p>
 		</div>
 	</div>
+	{% comment %}{%endif%}{% endcomment %}
 {% endfor %}
 
 
