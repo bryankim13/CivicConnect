@@ -3,20 +3,24 @@
 Profile
 {% endblock %}
 {% block content %}
-<div class="row justify-content-center">
-	<h2>Need to change something {{ user.first_name }}?</h2>
+<div class="row justify-content-center mb-3">
+	<h1>Hello {{ user.first_name }}</h1>
 </div>
-<br>
-<div class="row justify-content-center">
-	<h3> Edit Your Profile</h3>
-</div>
-<br>
+
+<h3 class="mb-3"> Edit Your Profile</h3>
 <form method="POST">
  {% csrf_token %}
  {{ user_form.as_p }}
  <!--{{ profile_form.as_p }}-->
  <input type="submit" class="btn btn-primary" value = "Update Profile"></button>
 </form>
+
+<h3 class="mb-3 mt-5">Edit Your Address</h3>
+<p>
+	<b>Current Location: </b>
+	{{me.State | upper}}
+	District {{me.District}}
+</p>
 <h5 style="color:#ad1400; font-weight:bold">{{apistatus}}</h5>
 <form action="{% url 'profile'%}" method="get">
     <label for="InputAddress">Enter an address to update your State, District, and Representatives!</label>
@@ -24,37 +28,37 @@ Profile
     <small id="addressHelp" class="form-text text-muted">We won't save this address</small>
 	<input type="submit" class="btn btn-primary" value = "Update address"></button>
 </form>
-<h6>State: {{me.State | upper}}</h6>
-<h6>District: {{me.District}}</h6>
 
-My Representatives
+<div class="row justify-content-center mb-3">
+	<h2>Your Representatives</h3>
+</div>
 
-{% for currentrep in allreps %}
-	{% comment %}{%if currentrep.state != ''%}{% endcomment %}
-	<div class="card" style="width: 40rem; margin-bottom:1em">
-		<div class="card-body">
-			<h5 class="card-title">{{currentrep.name}}</h5>
-			<h6 class="card-subtitle mb-2 text-muted">{{currentrep.party}}</h6>
-			<p class="card-text">{{currentrep.}}
-			{%if user.is_authenticated%}
-				{%if currentrep.state != ''%}
-					{%if currentrep.district != ''%}
-						House Representative:
-					{%else%}
-						Senator:
+<div class="row justify-content-center">
+	{% for currentrep in allreps %}
+		{% comment %}{%if currentrep.state != ''%}{% endcomment %}
+		<div class="card" style="width: 40rem; margin-bottom:1em">
+			<div class="card-body">
+				<h5 class="card-title">{{currentrep.name}}</h5>
+				<h6 class="card-subtitle mb-2 text-muted">{{currentrep.party}}</h6>
+				<p class="card-text">{{currentrep.}}
+				{%if user.is_authenticated%}
+					{%if currentrep.state != ''%}
+						{%if currentrep.district != ''%}
+							House Representative:
+						{%else%}
+							Senator:
+						{%endif%}
+						{{currentrep.state | upper}}
 					{%endif%}
-					{{currentrep.state | upper}}
+					{%if currentrep.district != ''%}
+						- {{currentrep.district}}
+					{%endif%}
 				{%endif%}
-				{%if currentrep.district != ''%}
-					- {{currentrep.district}}
-				{%endif%}
-			{%endif%}
-			</p>
+				</p>
+			</div>
 		</div>
-	</div>
-	{% comment %}{%endif%}{% endcomment %}
-{% endfor %}
-
-
+		{% comment %}{%endif%}{% endcomment %}
+	{% endfor %}
+</div>
 
 {% endblock %}
