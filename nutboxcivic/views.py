@@ -15,8 +15,6 @@ from .forms import templateForm, UserForm, ProfileForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from django.views.decorators.csrf import csrf_protect
-from django.utils.decorators import method_decorator
 
 import requests
 import json
@@ -32,7 +30,6 @@ def homeView(request):
         'templates_all': Emailtemplate.objects.all().order_by('-datecreated')[:5],
     })
 
-@method_decorator(csrf_protect, name='dispatch')
 class formTemplate(generic.CreateView):
     form_class = templateForm
     model = Emailtemplate
