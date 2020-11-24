@@ -10,7 +10,6 @@ Create Template - CivicConnect
 	</div>
 
 	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-	{% if user.is_authenticated %}
 	<form action="{% url 'creatingTemp' %}" method="post">
 		{% csrf_token %}
 		{{ form.as_p }}
@@ -19,5 +18,4 @@ Create Template - CivicConnect
 			<button type="submit" class="save btn btn-primary">Publish</button>
 		</div>
 	</form>
-	{% endif %}
 {% endblock %}
