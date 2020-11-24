@@ -1,3 +1,13 @@
+#REFERENCES
+#Title: Django ModelForm label customization
+#Author: QUHO
+#Date: 2016 june 10
+#Code version: unknown
+#URL: https://stackoverflow.com/questions/20986798/django-modelform-label-customization
+#Software License: Creative Commons Attribution-ShareAlike
+#
+
+
 from django import forms
 from masterdata.models import Emailtemplate, client, Representative
 from django.contrib.auth.models import User

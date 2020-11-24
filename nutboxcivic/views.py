@@ -1,3 +1,47 @@
+#REFERENCES
+#Title: Python, remove all non-alphabet chars from string
+#Author: limasxgoesto0, Jon-Eric
+#Date: 2019 december 18
+#Code version: unknown
+#URL: https://stackoverflow.com/questions/22520932/python-remove-all-non-alphabet-chars-from-string
+#Software License: Creative Commons Attribution-ShareAlike
+#
+#Title: Convert spaces to %20 in list
+#Author: Jan Rozycki, Ry-♦
+#Date: 2019 dec 22
+#Code version: unknown
+#URL: https://stackoverflow.com/questions/27556134/convert-spaces-to-20-in-list
+#Software License: Creative Commons Attribution-ShareAlike
+#
+#Title: How do I get a substring of a string in Python?
+#Author: Paolo Bergantino, community
+#Date: 2017 may 23
+#Code version: unknown
+#URL: https://stackoverflow.com/questions/663171/how-do-i-get-a-substring-of-a-string-in-python
+#Software License: Creative Commons Attribution-ShareAlike
+#
+#Title: Django request.GET
+#Author: tux21b
+#Date: 2010 aug 17
+#Code version: unknown
+#URL: https://stackoverflow.com/questions/3500859/django-request-get
+#Software License: Creative Commons Attribution-ShareAlike
+#
+#Title: How do I pass a URL with multiple parameters into a URL?
+#Author: Dexter, Community♦
+#Date: 2017 may 23
+#Code version: unknown
+#URL: https://stackoverflow.com/questions/5095887/how-do-i-pass-a-url-with-multiple-parameters-into-a-url
+#Software License: Creative Commons Attribution-ShareAlike
+#
+#Title: Check if request.GET var is None?
+#Author: Wesley
+#Date: 2010 mar 11
+#Code version: unknown
+#URL: https://stackoverflow.com/questions/2422055/how-to-check-if-request-get-var-is-none
+#Software License: Creative Commons Attribution-ShareAlike
+#
+
 from django.http import HttpResponse
 from django.http import Http404
 from django.http import HttpResponse, HttpResponseRedirect

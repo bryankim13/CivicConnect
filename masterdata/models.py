@@ -1,3 +1,12 @@
+#REFERENCES
+#Title: Bootstrap Cards
+#Author: unknown authors for bootstrap4 documentation
+#Date: unknown
+#Code version: unknown
+#URL: https://getbootstrap.com/docs/4.0/components/card/
+#Software License: MIT license
+#
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
